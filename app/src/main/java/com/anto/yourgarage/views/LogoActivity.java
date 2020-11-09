@@ -1,9 +1,11 @@
-package com.anto.yourgarage;
+package com.anto.yourgarage.views;
 
 import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.anto.yourgarage.R;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -19,7 +21,7 @@ public class LogoActivity extends AppCompatActivity {
         new Timer().schedule(new TimerTask() {
             @Override
             public void run() {
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                Intent intent = new Intent(getApplicationContext(), ListActivity.class);
                 startActivity(intent);
                 finish();
             }

@@ -1,33 +1,43 @@
-package com.anto.yourgarage;
+package com.anto.yourgarage.views;
 
+import android.content.Intent;
 import android.os.Bundle;
 
+import com.anto.yourgarage.R;
+import com.anto.yourgarage.interfaces.ListInterface;
+import com.anto.yourgarage.presenters.ListPresenter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.util.Log;
 import android.view.View;
 
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class MainActivity extends AppCompatActivity {
+public class ListActivity extends AppCompatActivity implements ListInterface.View {
+
+    String TAG = "YOURGARAGE/MainActivity";
+    private ListInterface.Presenter presenter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_list);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = findViewById(R.id.fab);
+        presenter = new ListPresenter(this);
+
+        FloatingActionButton fab = findViewById(R.id.listFab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Log.d(TAG, "Click on floating button");
+                presenter.onClickAddCar();
             }
         });
     }
@@ -62,5 +72,11 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void startFormActivity() {
+        Intent intent = new Intent(getApplicationContext(), FormActivity.class);
+        startActivity(intent);
     }
 }
