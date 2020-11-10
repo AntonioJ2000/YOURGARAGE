@@ -4,23 +4,26 @@ import android.graphics.Color;
 import android.os.Bundle;
 
 import com.anto.yourgarage.R;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
+import com.anto.yourgarage.interfaces.FormInterface;
+import com.anto.yourgarage.presenters.FormPresenter;
+import com.anto.yourgarage.presenters.ListPresenter;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+
 
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.Toast;
-import android.widget.ToggleButton;
 
-public class FormActivity extends AppCompatActivity {
+
+public class FormActivity extends AppCompatActivity implements FormInterface.View {
+
+    private FormInterface.Presenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +43,9 @@ public class FormActivity extends AppCompatActivity {
                 }
             });
         }
+
+        presenter = new FormPresenter(this);
+
         final ImageButton infoButton = findViewById(R.id.infoButton);
         infoButton.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -70,7 +76,19 @@ public class FormActivity extends AppCompatActivity {
             {}
         });
         
+        //Cerramos la Actividad del formulario.
+        Button saveCar = findViewById(R.id.saveCar);
+        saveCar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                presenter.onClickSaveCar();
+            }
+        });
 
+    }
 
+    @Override
+    public void closeFormActivity() {
+        finish();
     }
 }
