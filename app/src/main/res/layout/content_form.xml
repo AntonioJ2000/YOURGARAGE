@@ -37,7 +37,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <Button
-                android:id="@+id/button2"
+                android:id="@+id/saveCar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="560dp"
@@ -100,11 +100,11 @@
                 android:id="@+id/button3"
                 android:layout_width="110dp"
                 android:layout_height="43dp"
+                android:layout_marginStart="12dp"
                 android:layout_marginTop="147dp"
-                android:layout_marginEnd="28dp"
                 android:background="@drawable/mybutton"
                 android:text="Agregar foto..."
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/imageView"
                 app:layout_constraintTop_toTopOf="parent" />
 
 
@@ -112,11 +112,8 @@
                 android:id="@+id/imageView"
                 android:layout_width="239dp"
                 android:layout_height="170dp"
-                android:layout_marginStart="42dp"
+                android:layout_marginStart="30dp"
                 android:layout_marginTop="16dp"
-                android:layout_marginEnd="20dp"
-                app:layout_constraintEnd_toStartOf="@+id/button3"
-                app:layout_constraintHorizontal_bias="0.928"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@mipmap/ic_launcher" />
@@ -147,7 +144,7 @@
                 app:layout_constraintEnd_toStartOf="@+id/textInputLayout"
                 app:layout_constraintHorizontal_bias="0.529"
                 app:layout_constraintStart_toStartOf="parent"
-                app:srcCompat="@mipmap/ownericon" />
+                app:srcCompat="@drawable/ownericon" />
 
             <ImageView
                 android:id="@+id/imageView6"
@@ -160,7 +157,7 @@
                 app:layout_constraintEnd_toStartOf="@+id/textInputLayout4"
                 app:layout_constraintHorizontal_bias="0.529"
                 app:layout_constraintStart_toStartOf="parent"
-                app:srcCompat="@mipmap/carregistrationicon" />
+                app:srcCompat="@drawable/carregistrationicon" />
 
             <ImageView
                 android:id="@+id/imageView7"
@@ -173,7 +170,7 @@
                 app:layout_constraintEnd_toStartOf="@+id/textInputLayout5"
                 app:layout_constraintHorizontal_bias="0.529"
                 app:layout_constraintStart_toStartOf="parent"
-                app:srcCompat="@mipmap/receptiondateicon" />
+                app:srcCompat="@drawable/receptiondateicon" />
 
             <ImageView
                 android:id="@+id/imageView8"
@@ -186,7 +183,7 @@
                 app:layout_constraintEnd_toStartOf="@+id/textInputLayout5"
                 app:layout_constraintHorizontal_bias="0.529"
                 app:layout_constraintStart_toStartOf="parent"
-                app:srcCompat="@mipmap/fuelicon" />
+                app:srcCompat="@drawable/fuelicon" />
 
             <ImageView
                 android:id="@+id/imageView4"
@@ -199,7 +196,7 @@
                 app:layout_constraintEnd_toStartOf="@+id/textInputLayout2"
                 app:layout_constraintHorizontal_bias="0.529"
                 app:layout_constraintStart_toStartOf="parent"
-                app:srcCompat="@mipmap/carbrandicon" />
+                app:srcCompat="@drawable/carbrandicon" />
 
             <ImageView
                 android:id="@+id/imageView5"
@@ -212,13 +209,13 @@
                 app:layout_constraintEnd_toStartOf="@+id/textInputLayout3"
                 app:layout_constraintHorizontal_bias="0.529"
                 app:layout_constraintStart_toStartOf="parent"
-                app:srcCompat="@mipmap/modelicon" />
+                app:srcCompat="@drawable/modelicon" />
 
             <ToggleButton
                 android:id="@+id/estadoButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
+                android:layout_marginStart="22dp"
                 android:layout_marginTop="236dp"
                 android:text="ToggleButton"
                 android:textOff="Normal"
@@ -230,7 +227,7 @@
                 android:id="@+id/textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="54dp"
+                android:layout_marginStart="36dp"
                 android:layout_marginBottom="7dp"
                 android:text="Estado del coche"
                 android:textSize="16sp"
@@ -241,16 +238,16 @@
                 android:id="@+id/spinner"
                 android:layout_width="210dp"
                 android:layout_height="35dp"
-                android:layout_marginStart="52dp"
-                android:layout_marginTop="17dp"
+                android:layout_marginStart="60dp"
+                android:layout_marginTop="16dp"
                 android:spinnerMode="dropdown"
                 app:layout_constraintStart_toStartOf="@+id/imageView8"
                 app:layout_constraintTop_toBottomOf="@+id/textInputLayout5" />
 
             <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="235dp"
-                android:layout_height="54dp"
-                android:layout_marginStart="16dp"
+                android:layout_width="271dp"
+                android:layout_height="53dp"
+                android:layout_marginStart="20dp"
                 android:layout_marginBottom="16dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent">
@@ -265,17 +262,17 @@
                 android:id="@+id/imageView9"
                 android:layout_width="43dp"
                 android:layout_height="38dp"
-                android:layout_marginStart="40dp"
-                android:layout_marginTop="2dp"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="4dp"
                 app:layout_constraintStart_toEndOf="@+id/spinner"
                 app:layout_constraintTop_toBottomOf="@+id/estadoButton"
-                app:srcCompat="@mipmap/infobutton" />
+                app:srcCompat="@drawable/infobutton" />
 
             <ImageButton
                 android:id="@+id/infoButton"
                 android:layout_width="58dp"
                 android:layout_height="39dp"
-                android:layout_marginStart="32dp"
+                android:layout_marginStart="17dp"
                 android:background="@android:color/transparent"
                 app:layout_constraintStart_toEndOf="@+id/spinner"
                 app:layout_constraintTop_toTopOf="@+id/imageView9"
