@@ -27,7 +27,7 @@ public class ListActivity extends AppCompatActivity implements ListInterface.Vie
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar2);
         setSupportActionBar(toolbar);
 
         presenter = new ListPresenter(this);
@@ -45,7 +45,7 @@ public class ListActivity extends AppCompatActivity implements ListInterface.Vie
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.menu_list, menu);
         return true;
     }
 
@@ -65,10 +65,14 @@ public class ListActivity extends AppCompatActivity implements ListInterface.Vie
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
+        presenter = new ListPresenter(this);
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
+        }else if(id == R.id.action_search){
+            presenter.onClickSearch();
+        }else if(id == R.id.action_about){
+            presenter.onClickAbout();
         }
 
         return super.onOptionsItemSelected(item);
@@ -77,6 +81,18 @@ public class ListActivity extends AppCompatActivity implements ListInterface.Vie
     @Override
     public void startFormActivity() {
         Intent intent = new Intent(getApplicationContext(), FormActivity.class);
+        startActivity(intent);
+    }
+
+    @Override
+    public void startSearchActivity(){
+        Intent intent = new Intent(getApplicationContext(), SearchActivity.class);
+        startActivity(intent);
+    }
+
+    @Override
+    public void startAboutActivity() {
+        Intent intent = new Intent(getApplicationContext(), AboutActivity.class);
         startActivity(intent);
     }
 

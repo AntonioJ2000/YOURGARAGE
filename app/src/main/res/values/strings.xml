@@ -1,6 +1,12 @@
 <resources>
     <string name="app_name">YOURGARAGE</string>
-    <string name="action_settings">Settings</string>
+    <string name="action_settings">Opciones</string>
+    <string name="action_search">Buscar</string>
+    <string name="action_about">Sobre la app...</string>
+    <string name="developerInfo">YOURGARAGE. FROM ANTO</string>
+    <string name="Contact">Contáctanos...</string>
+    <string name="developerMail">yourgarage@example.es</string>
+
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
     <string name="second_fragment_label">Second Fragment</string>
@@ -10,4 +16,50 @@
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="title_activity_form">FormActivity</string>
+
+    <string name="searchedResults">Se han encontrado 13 elementos</string>
+    <string name="floatingButtonDesc">Button that opens the FormActivity</string>
+    <string name="fromDeveloper">FROM ANTO</string>
+    <string name="appLogo">The app logo</string>
+    <string name="owner">Propietario</string>
+    <string name="add">Añadir</string>
+    <string name="brand">Marca</string>
+    <string name="model">Modelo</string>
+    <string name="enrollment">Matrícula</string>
+    <string name="addPhoto">Agregar foto...</string>
+    <string name="receptionDate">Fecha de recepción</string>
+    <string name="togglebutton">ToggleButton</string>
+    <string name="normal">Normal</string>
+    <string name="grave">Grave</string>
+    <string name="status">Estado del coche</string>
+    <string name="fault">Avería (Resumen)</string>
+    <string name="deletePhoto">Eliminar foto</string>
+    <string name="cancel">cancelar</string>
+    <string name="photoDescription">The photo that the user selected</string>
+
+
+    <string name="ownerIconDescription">Owner Icon</string>
+    <string name="brandIconDescription">Brand Icon</string>
+    <string name="modelIconDescription">Model Icon</string>
+    <string name="enrollmentIconDescription">Enrollment Icon</string>
+    <string name="receptionDateIconDescription">Date Icon</string>
+    <string name="fuelIconDescription">Fuel Icon</string>
+    <string name="infoIconDescription">Help (info) Icon</string>
+
+    <string name="carOwner">Owner</string>
+    <string name="carBrand">Brand</string>
+    <string name="carModel">Model</string>
+    <string name="carEnrollment">Enrollment</string>
+    <string name="carReceptionDate">ReceptionDate</string>
+    <string name="carFuel">Fuel</string>
+    <string name="carStatus">Status</string>
+    <string name="carFault">Fault</string>
+
+    <string name="carDetails">Más Información...</string>
+    <string name="title_activity_search">SearchActivity</string>
+
+    <string name="ownerSearch">Indique el nombre del propietario que desea buscar</string>
+    <string name="dateSearch">Indique la fecha de recepción del coche</string>
+    <string name="title_activity_about">AboutActivity</string>
+
 </resources>

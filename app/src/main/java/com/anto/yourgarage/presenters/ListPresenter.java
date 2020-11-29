@@ -18,4 +18,13 @@ public class ListPresenter implements ListInterface.Presenter {
         
     }
 
+    @Override
+    public void onClickSearch() {
+        view.startSearchActivity();
+    }
+
+    @Override
+    public void onClickAbout(){
+        view.startAboutActivity();
+    }
 }
