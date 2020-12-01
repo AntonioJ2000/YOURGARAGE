@@ -21,16 +21,17 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/textInputLayout"
-                android:layout_width="234dp"
-                android:layout_height="50dp"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="64dp"
-                android:layout_marginTop="80dp"
+                android:layout_marginTop="48dp"
                 android:layout_marginBottom="220dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/textInputEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/owner" />
@@ -53,13 +54,14 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/textInputLayout2"
                 android:layout_width="234dp"
-                android:layout_height="50dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="64dp"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="12dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textInputLayout">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/textInputEditText2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/brand" />
@@ -68,13 +70,14 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/textInputLayout3"
                 android:layout_width="234dp"
-                android:layout_height="50dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="64dp"
                 android:layout_marginTop="5dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textInputLayout2">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/textInputEditText3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/model" />
@@ -84,13 +87,13 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/textInputLayout4"
                 android:layout_width="160dp"
-                android:layout_height="50dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="64dp"
-                android:layout_marginTop="5dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textInputLayout3">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/textInputEditText4"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/enrollment" />
@@ -125,7 +128,7 @@
                 android:layout_height="42dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
-                android:layout_marginBottom="372dp"
+                android:layout_marginBottom="382dp"
                 android:contentDescription="@string/ownerIconDescription"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/textInputLayout"
@@ -139,7 +142,7 @@
                 android:layout_height="42dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
-                android:layout_marginBottom="204dp"
+                android:layout_marginBottom="200dp"
                 android:contentDescription="@string/enrollmentIconDescription"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/textInputLayout4"
@@ -153,7 +156,7 @@
                 android:layout_height="42dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
-                android:layout_marginBottom="148dp"
+                android:layout_marginBottom="140dp"
                 android:contentDescription="@string/receptionDateIconDescription"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/textDate"
@@ -164,8 +167,8 @@
                 android:id="@+id/imageView8"
                 android:layout_width="49dp"
                 android:layout_height="42dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginBottom="96dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginBottom="90dp"
                 android:contentDescription="@string/fuelIconDescription"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -215,8 +218,7 @@
                 android:id="@+id/textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="36dp"
-                android:layout_marginBottom="7dp"
+                android:layout_marginStart="42dp"
                 android:text="@string/status"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toTopOf="@+id/estadoButton"
@@ -224,23 +226,25 @@
 
             <Spinner
                 android:id="@+id/spinner"
-                android:layout_width="210dp"
-                android:layout_height="35dp"
-                android:layout_marginStart="60dp"
+                android:layout_width="213dp"
+                android:layout_height="38dp"
+                android:layout_marginStart="55dp"
                 android:layout_marginTop="8dp"
                 android:spinnerMode="dropdown"
                 app:layout_constraintStart_toStartOf="@+id/imageView8"
                 app:layout_constraintTop_toBottomOf="@+id/textDate" />
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayout5"
                 android:layout_width="271dp"
-                android:layout_height="53dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
-                android:layout_marginBottom="40dp"
+                android:layout_marginBottom="35dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/textInputEditText5"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/fault" />
@@ -250,8 +254,7 @@
                 android:id="@+id/infoImage"
                 android:layout_width="43dp"
                 android:layout_height="38dp"
-                android:layout_marginStart="25dp"
-                android:layout_marginTop="4dp"
+                android:layout_marginStart="36dp"
                 android:contentDescription="@string/infoIconDescription"
                 app:layout_constraintStart_toEndOf="@+id/spinner"
                 app:layout_constraintTop_toBottomOf="@+id/estadoButton"

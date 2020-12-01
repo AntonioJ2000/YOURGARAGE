@@ -6,25 +6,36 @@
     android:layout_height="match_parent"
     android:background="@color/backgroundColor">
 
+    <Spinner
+        android:id="@+id/searchSpinner"
+        android:layout_width="237dp"
+        android:layout_height="37dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="41dp"
+        android:spinnerMode="dropdown"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView20" />
+
+    <TextView
+        android:id="@+id/textView20"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:layout_marginEnd="35dp"
+        android:text="@string/fuelSearch"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <ImageView
         android:id="@+id/imageView13"
         android:layout_width="49dp"
         android:layout_height="42dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="11dp"
+        android:layout_marginTop="21dp"
+        android:layout_marginEnd="1dp"
         android:contentDescription="@string/fuelIconDescription"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/searchSpinner"
         app:layout_constraintTop_toBottomOf="@+id/textView20"
         app:srcCompat="@drawable/fuelicon" />
-
-    <Spinner
-        android:id="@+id/searchSpinner"
-        android:layout_width="240dp"
-        android:layout_height="36dp"
-        android:layout_marginTop="11dp"
-        android:spinnerMode="dropdown"
-        app:layout_constraintStart_toEndOf="@+id/imageView13"
-        app:layout_constraintTop_toBottomOf="@+id/textView20" />
 
     <TextView
         android:id="@+id/textView18"
@@ -63,7 +74,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="66dp"
-        android:layout_marginTop="52dp"
+        android:layout_marginTop="80dp"
         android:text="@string/ownerSearch"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -108,13 +119,4 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <TextView
-        android:id="@+id/textView20"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="66dp"
-        android:layout_marginTop="30dp"
-        android:text="@string/fuelSearch"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextReceptionDate" />
 </androidx.constraintlayout.widget.ConstraintLayout>

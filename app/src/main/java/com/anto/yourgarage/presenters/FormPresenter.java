@@ -17,14 +17,31 @@ public class FormPresenter implements FormInterface.Presenter {
     public void onClickSaveCar() {
         view.closeFormActivity();
     }
-    String error_msg;
 
+
+    @Override
     public String getError(String error_code){
+        String error_msg = "";
         switch (error_code){
-            case "ContactName":
-                error_msg = MyApplication.getContext().getResources().getString(R.string.action_settings);
+            case "ownerName":
+                error_msg = MyApplication.getContext().getResources().getString(R.string.ownerNameError);
                 break;
 
+            case "brandName":
+                error_msg = MyApplication.getContext().getResources().getString(R.string.brandNameError);
+                break;
+
+            case "modelName":
+                error_msg = MyApplication.getContext().getResources().getString(R.string.modelNameError);
+                break;
+
+            case "enrollmentName":
+                error_msg = MyApplication.getContext().getResources().getString(R.string.enrollmentNameError);
+                break;
+
+            case "dateError":
+                error_msg = MyApplication.getContext().getResources().getString(R.string.dateError);
+                break;
         }
         return error_msg;
     }

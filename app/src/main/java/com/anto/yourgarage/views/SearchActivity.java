@@ -6,14 +6,12 @@ import android.os.Bundle;
 
 import com.anto.yourgarage.R;
 import com.anto.yourgarage.interfaces.SearchInterface;
-import com.anto.yourgarage.presenters.FormPresenter;
 import com.anto.yourgarage.presenters.SearchPresenter;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -114,6 +112,12 @@ public class SearchActivity extends AppCompatActivity implements SearchInterface
         });
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_help, menu);
+        return true;
+    }
 
     @Override
     public void closeSearchActivity() {

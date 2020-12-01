@@ -8,14 +8,17 @@ import android.os.Bundle;
 
 import com.anto.yourgarage.R;
 import com.anto.yourgarage.interfaces.FormInterface;
+import com.anto.yourgarage.models.CarEntity;
 import com.anto.yourgarage.presenters.FormPresenter;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -34,6 +37,21 @@ import java.util.Calendar;
 public class FormActivity extends AppCompatActivity implements FormInterface.View {
 
     private FormInterface.Presenter presenter;
+
+    CarEntity car;
+    TextInputEditText ownerNameET;
+    TextInputLayout ownerNameTIL;
+
+    TextInputEditText brandNameET;
+    TextInputLayout brandNameTIL;
+
+    TextInputEditText modelNameET;
+    TextInputLayout modelNameTIL;
+
+    TextInputEditText enrollmentNameET;
+    TextInputLayout enrollmentNameTIL;
+
+    EditText receptionDate;
 
     private Spinner spinner;
     private ArrayAdapter<String> adapter;
@@ -72,6 +90,96 @@ public class FormActivity extends AppCompatActivity implements FormInterface.Vie
                 Toast.makeText(FormActivity.this, "Consideramos como grave aquel vehículo que no puede circular", Toast.LENGTH_LONG).show();
             }
         });
+
+        car = new CarEntity();
+
+        ownerNameET = findViewById(R.id.textInputEditText);
+        ownerNameTIL = findViewById(R.id.textInputLayout);
+
+        ownerNameET.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(!hasFocus){
+                    if(car.setName(ownerNameET.getText().toString()) == false){
+                        ownerNameTIL.setError(presenter.getError("ownerName"));
+                    }else{
+                        ownerNameTIL.setError("");
+                    }
+                }else{
+                    //Log.d
+                }
+            }
+        });
+
+        brandNameET = findViewById(R.id.textInputEditText2);
+        brandNameTIL = findViewById(R.id.textInputLayout2);
+
+        brandNameET.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(!hasFocus){
+                    if(car.setName(brandNameET.getText().toString()) == false){
+                        brandNameTIL.setError(presenter.getError("brandName"));
+                    }else{
+                        brandNameTIL.setError("");
+                    }
+                }else{
+                    //Log.d
+                }
+            }
+        });
+
+        modelNameET = findViewById(R.id.textInputEditText3);
+        modelNameTIL = findViewById(R.id.textInputLayout3);
+
+        modelNameET.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(!hasFocus){
+                    if(car.setName(modelNameET.getText().toString()) == false){
+                        modelNameTIL.setError(presenter.getError("modelName"));
+                    }else{
+                        modelNameTIL.setError("");
+                    }
+                }else{
+                    //Log.d
+                }
+            }
+        });
+
+        enrollmentNameET = findViewById(R.id.textInputEditText4);
+        enrollmentNameTIL = findViewById(R.id.textInputLayout4);
+
+        enrollmentNameET.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(!hasFocus){
+                    if(car.setName(enrollmentNameET.getText().toString()) == false){
+                        enrollmentNameTIL.setError(presenter.getError("enrollmentName"));
+                    }else{
+                        enrollmentNameTIL.setError("");
+                    }
+                }else{
+                    //Log.d
+                }
+            }
+        });
+
+        receptionDate = findViewById(R.id.textDate);
+
+        receptionDate.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(!hasFocus){
+                    if(car.setReceptionDate(receptionDate.getText().toString()) == false){
+                        receptionDate.setError(presenter.getError("dateError"));
+                    }
+                }else{
+                    receptionDate.setError("");
+                }
+            }
+        });
+
 
         //String[] options = {"Seleccione combustible", "Otro" "Gasolina", "Diésel", "Eléctrico"};
         ArrayList<String> options = new ArrayList<>();
@@ -155,6 +263,13 @@ public class FormActivity extends AppCompatActivity implements FormInterface.Vie
             }
         });
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_help, menu);
+        return true;
     }
 
     public void spinnerAdd(){

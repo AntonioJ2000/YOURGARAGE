@@ -3,6 +3,7 @@
     <string name="action_settings">Opciones</string>
     <string name="action_search">Buscar</string>
     <string name="action_about">Sobre la app...</string>
+    <string name="action_help">Ayuda</string>
     <string name="developerInfo">YOURGARAGE. FROM ANTO</string>
     <string name="Contact">Contáctanos...</string>
     <string name="developerMail">yourgarage@example.es</string>
@@ -71,5 +72,11 @@
     <string name="spinnerFuelType1">Gasolina</string>
     <string name="spinnerFuelType2">Diésel</string>
     <string name="spinnerFuelType3">Eléctrico</string>
+
+    <string name="ownerNameError">Por favor, introduce un nombre válido.</string>
+    <string name="brandNameError">Por favor, introduce una marca válida.</string>
+    <string name="modelNameError">Por favor, introduce un modelo válido.</string>
+    <string name="enrollmentNameError">Por favor, introduce un valor de matrícula válido.</string>
+    <string name="dateError">Por favor, introduce un formato de fecha válido (dd/mm/yyyy).</string>
 
 </resources>
