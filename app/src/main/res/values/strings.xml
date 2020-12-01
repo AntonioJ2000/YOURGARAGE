@@ -23,6 +23,7 @@
     <string name="appLogo">The app logo</string>
     <string name="owner">Propietario</string>
     <string name="add">Añadir</string>
+    <string name="cancel">Cancelar</string>
     <string name="brand">Marca</string>
     <string name="model">Modelo</string>
     <string name="enrollment">Matrícula</string>
@@ -34,7 +35,9 @@
     <string name="status">Estado del coche</string>
     <string name="fault">Avería (Resumen)</string>
     <string name="deletePhoto">Eliminar foto</string>
-    <string name="cancel">cancelar</string>
+    <string name="deleteCar">Eliminar</string>
+    <string name="spinnerText">Añade el nombre del tipo de combustible que desee</string>
+    <string name="spinnerFuel">Combustible</string>
     <string name="photoDescription">The photo that the user selected</string>
 
 
@@ -60,6 +63,13 @@
 
     <string name="ownerSearch">Indique el nombre del propietario que desea buscar</string>
     <string name="dateSearch">Indique la fecha de recepción del coche</string>
+    <string name="fuelSearch">Indique el tipo de combustible del coche</string>
+
     <string name="title_activity_about">AboutActivity</string>
+    <string name="spinnerSelectItem">Seleccione combustible</string>
+    <string name="spinnerSelectNew">Otro...</string>
+    <string name="spinnerFuelType1">Gasolina</string>
+    <string name="spinnerFuelType2">Diésel</string>
+    <string name="spinnerFuelType3">Eléctrico</string>
 
 </resources>

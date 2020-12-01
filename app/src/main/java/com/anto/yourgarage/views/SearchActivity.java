@@ -15,16 +15,23 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 
 public class SearchActivity extends AppCompatActivity implements SearchInterface.View{
 
     private SearchInterface.Presenter presenter;
 
+    private Spinner spinner;
+    private ArrayAdapter<String> adapter;
     Context myContext;
     Calendar calendar;
     DatePickerDialog datePickerDialog;
@@ -70,6 +77,33 @@ public class SearchActivity extends AppCompatActivity implements SearchInterface
         });
 
         presenter = new SearchPresenter(this);
+        spinner = (Spinner) findViewById(R.id.searchSpinner);
+        ArrayList<String> options = new ArrayList<>();
+        options.add(getString(R.string.spinnerSelectItem));
+        options.add(getString(R.string.spinnerFuelType1));
+        options.add(getString(R.string.spinnerFuelType2));
+        options.add(getString(R.string.spinnerFuelType3));
+
+        adapter = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item, options);
+        adapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
+
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int pos, long id)
+            {
+                if(pos >= 1){
+                    Toast.makeText(spinner.getContext(), "Has seleccionado " + spinner.getItemAtPosition(pos).toString(),Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(spinner.getContext(), "Nada seleccionado", Toast.LENGTH_LONG).cancel();
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent)
+            {}
+        });
 
         Button searchCar = findViewById(R.id.searchButton);
         searchCar.setOnClickListener(new View.OnClickListener() {

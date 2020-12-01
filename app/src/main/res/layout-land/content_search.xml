@@ -4,71 +4,67 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/backgroundColor"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+    android:background="@color/backgroundColor">
 
     <ImageView
-        android:id="@+id/imageView9"
+        android:id="@+id/imageView13"
         android:layout_width="49dp"
         android:layout_height="42dp"
-        android:layout_marginTop="64dp"
-        android:layout_marginEnd="3dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="11dp"
         android:contentDescription="@string/fuelIconDescription"
-        app:layout_constraintEnd_toStartOf="@+id/searchSpinner"
-        app:layout_constraintTop_toBottomOf="@+id/imageView11"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView20"
         app:srcCompat="@drawable/fuelicon" />
 
     <Spinner
         android:id="@+id/searchSpinner"
         android:layout_width="240dp"
         android:layout_height="36dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="65dp"
+        android:layout_marginTop="11dp"
         android:spinnerMode="dropdown"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextReceptionDate" />
+        app:layout_constraintStart_toEndOf="@+id/imageView13"
+        app:layout_constraintTop_toBottomOf="@+id/textView20" />
 
     <TextView
-        android:id="@+id/textView6"
+        android:id="@+id/textView18"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="29dp"
+        android:layout_marginStart="66dp"
+        android:layout_marginTop="30dp"
         android:text="@string/dateSearch"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout6" />
 
     <ImageView
-        android:id="@+id/imageView11"
+        android:id="@+id/imageView14"
         android:layout_width="49dp"
         android:layout_height="42dp"
-        android:layout_marginTop="65dp"
-        android:layout_marginEnd="2dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
         android:contentDescription="@string/receptionDateIconDescription"
-        app:layout_constraintEnd_toStartOf="@+id/editTextReceptionDate"
-        app:layout_constraintTop_toBottomOf="@+id/imageView10"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView18"
         app:srcCompat="@drawable/receptiondateicon" />
 
     <ImageView
-        android:id="@+id/imageView10"
+        android:id="@+id/imageView15"
         android:layout_width="49dp"
         android:layout_height="42dp"
-        android:layout_marginTop="65dp"
-        android:layout_marginEnd="2dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
         android:contentDescription="@string/ownerIconDescription"
-        app:layout_constraintEnd_toStartOf="@+id/textInputLayout6"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView19"
         app:srcCompat="@drawable/ownericon" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/textView19"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="66dp"
+        android:layout_marginTop="52dp"
         android:text="@string/ownerSearch"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -76,12 +72,9 @@
         android:id="@+id/textInputLayout6"
         android:layout_width="300dp"
         android:layout_height="51dp"
-        android:layout_marginStart="80dp"
-        android:layout_marginTop="56dp"
-        android:layout_marginEnd="31dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_marginTop="9dp"
+        app:layout_constraintStart_toEndOf="@+id/imageView15"
+        app:layout_constraintTop_toBottomOf="@+id/textView19">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
@@ -93,9 +86,7 @@
         android:id="@+id/editTextReceptionDate"
         android:layout_width="300dp"
         android:layout_height="43dp"
-        android:layout_marginStart="80dp"
-        android:layout_marginTop="65dp"
-        android:layout_marginEnd="31dp"
+        android:layout_marginTop="8dp"
         android:autofillHints=""
         android:clickable="true"
         android:ems="10"
@@ -103,33 +94,27 @@
         android:hint="@string/receptionDate"
         android:inputType="date"
         android:maxLines="1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout6" />
+        app:layout_constraintStart_toEndOf="@+id/imageView14"
+        app:layout_constraintTop_toBottomOf="@+id/textView18" />
 
     <Button
         android:id="@+id/searchButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="162dp"
-        android:layout_marginTop="27dp"
-        android:layout_marginEnd="161dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="30dp"
         android:background="@drawable/mybutton"
         android:text="@string/action_search"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchSpinner" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/textView20"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="29dp"
+        android:layout_marginStart="66dp"
+        android:layout_marginTop="30dp"
         android:text="@string/fuelSearch"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextReceptionDate" />
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>
