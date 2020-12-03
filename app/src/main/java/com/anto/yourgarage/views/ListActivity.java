@@ -5,23 +5,29 @@ import android.os.Bundle;
 
 import com.anto.yourgarage.R;
 import com.anto.yourgarage.interfaces.ListInterface;
+import com.anto.yourgarage.models.CarEntity;
 import com.anto.yourgarage.presenters.ListPresenter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.View;
 
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
+
+import java.util.ArrayList;
 
 public class ListActivity extends AppCompatActivity implements ListInterface.View {
 
     String TAG = "YOURGARAGE/MainActivity";
     private ListInterface.Presenter presenter;
-
+    private ArrayList<CarEntity> items;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +46,36 @@ public class ListActivity extends AppCompatActivity implements ListInterface.Vie
                 presenter.onClickAddCar();
             }
         });
+
+        items = new ArrayList<CarEntity>();
+        items.add(new CarEntity("KIA", "Carnival 2005"));
+        items.add(new CarEntity("Renault", "Megane"));
+        items.add(new CarEntity("Ferrari", "Enzo"));
+        items.add(new CarEntity("Lamborghini", "Gallardo"));
+        items.add(new CarEntity("Bugatti", "Veyron"));
+
+
+        final RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+
+        // Crea el Adaptador con los datos de la lista anterior
+        CarAdapter adaptador = new CarAdapter(items);
+
+        // Asocia el elemento de la lista con una acción al ser pulsado
+        adaptador.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Acción al pulsar el elemento
+                int position = recyclerView.getChildAdapterPosition(v);
+                Toast.makeText(ListActivity.this, "Posición: " + String.valueOf(position) + " Nombre: " + items.get(position).getName() + " Modelo: " + items.get(position).getModelName(), Toast.LENGTH_SHORT)
+                        .show();
+            }
+        });
+
+        // Asocia el Adaptador al RecyclerView
+        recyclerView.setAdapter(adaptador);
+
+        // Muestra el RecyclerView en vertical
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 
     @Override

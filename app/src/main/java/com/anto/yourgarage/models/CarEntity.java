@@ -5,7 +5,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class CarEntity {
-    private String OwnerName;
+    private String image;
+    private String ownerName;
     private String brandName;
     private String modelName;
     private String enrollmentName;
@@ -18,13 +19,26 @@ public class CarEntity {
     public CarEntity() {
     }
 
+    public CarEntity(String ownerName, String modelName){
+        this.ownerName = ownerName;
+        this.modelName = modelName;
+    };
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
     public String getName() {
-        return OwnerName;
+        return ownerName;
     }
 
     public boolean setName(String name) {
         if (name.matches("[A-Za-z ]*")) {
-            this.OwnerName = OwnerName;
+            this.ownerName = ownerName;
             return true;
         } else {
             return false;
