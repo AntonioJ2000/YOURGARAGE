@@ -21,7 +21,7 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/textInputLayout"
-                android:layout_width="300dp"
+                android:layout_width="234dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="64dp"
                 android:layout_marginTop="48dp"
@@ -56,7 +56,7 @@
                 android:layout_width="234dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="64dp"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="5dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textInputLayout">
 
@@ -128,7 +128,7 @@
                 android:layout_height="42dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
-                android:layout_marginBottom="382dp"
+                android:layout_marginBottom="387dp"
                 android:contentDescription="@string/ownerIconDescription"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/textInputLayout"
@@ -142,7 +142,7 @@
                 android:layout_height="42dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
-                android:layout_marginBottom="200dp"
+                android:layout_marginBottom="207dp"
                 android:contentDescription="@string/enrollmentIconDescription"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/textInputLayout4"
@@ -154,12 +154,10 @@
                 android:id="@+id/imageView7"
                 android:layout_width="49dp"
                 android:layout_height="42dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="140dp"
+                android:layout_marginStart="7dp"
+                android:layout_marginBottom="150dp"
                 android:contentDescription="@string/receptionDateIconDescription"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/textDate"
                 app:layout_constraintStart_toStartOf="parent"
                 app:srcCompat="@drawable/receptiondateicon" />
 
@@ -168,7 +166,7 @@
                 android:layout_width="49dp"
                 android:layout_height="42dp"
                 android:layout_marginStart="8dp"
-                android:layout_marginBottom="90dp"
+                android:layout_marginBottom="96dp"
                 android:contentDescription="@string/fuelIconDescription"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -180,7 +178,7 @@
                 android:layout_height="42dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
-                android:layout_marginBottom="316dp"
+                android:layout_marginBottom="321dp"
                 android:contentDescription="@string/brandIconDescription"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/textInputLayout2"
@@ -194,7 +192,7 @@
                 android:layout_height="42dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
-                android:layout_marginBottom="260dp"
+                android:layout_marginBottom="265dp"
                 android:contentDescription="@string/modelIconDescription"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/textInputLayout3"
@@ -206,40 +204,41 @@
                 android:id="@+id/estadoButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"
-                android:layout_marginTop="255dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="12dp"
                 android:text="@string/togglebutton"
                 android:textOff="@string/normal"
                 android:textOn="@string/grave"
-                app:layout_constraintStart_toEndOf="@+id/textDate"
-                app:layout_constraintTop_toBottomOf="@+id/button2" />
+                app:layout_constraintStart_toEndOf="@+id/textInputLayout7"
+                app:layout_constraintTop_toBottomOf="@+id/textView" />
 
             <TextView
                 android:id="@+id/textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="42dp"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="33dp"
                 android:text="@string/status"
                 android:textSize="16sp"
-                app:layout_constraintBottom_toTopOf="@+id/estadoButton"
-                app:layout_constraintStart_toEndOf="@+id/textInputLayout4" />
+                app:layout_constraintStart_toEndOf="@+id/textInputLayout4"
+                app:layout_constraintTop_toBottomOf="@+id/textInputLayout3" />
 
             <Spinner
                 android:id="@+id/spinner"
-                android:layout_width="213dp"
-                android:layout_height="38dp"
-                android:layout_marginStart="55dp"
-                android:layout_marginTop="8dp"
+                android:layout_width="214dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="56dp"
+                android:layout_marginTop="4dp"
                 android:spinnerMode="dropdown"
                 app:layout_constraintStart_toStartOf="@+id/imageView8"
-                app:layout_constraintTop_toBottomOf="@+id/textDate" />
+                app:layout_constraintTop_toBottomOf="@+id/textInputLayout7" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/textInputLayout5"
-                android:layout_width="271dp"
+                android:layout_width="260dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
-                android:layout_marginBottom="35dp"
+                android:layout_marginBottom="20dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent">
 
@@ -254,10 +253,11 @@
                 android:id="@+id/infoImage"
                 android:layout_width="43dp"
                 android:layout_height="38dp"
-                android:layout_marginStart="36dp"
+                android:layout_marginStart="6dp"
+                android:layout_marginTop="18dp"
                 android:contentDescription="@string/infoIconDescription"
-                app:layout_constraintStart_toEndOf="@+id/spinner"
-                app:layout_constraintTop_toBottomOf="@+id/estadoButton"
+                app:layout_constraintStart_toEndOf="@+id/estadoButton"
+                app:layout_constraintTop_toBottomOf="@+id/textView"
                 app:srcCompat="@drawable/infobutton" />
 
             <Button
@@ -282,17 +282,21 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/saveCar" />
 
-            <EditText
-                android:id="@+id/textDate"
-                android:layout_width="wrap_content"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayout7"
+                android:layout_width="190dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="64dp"
-                android:layout_marginTop="18dp"
-                android:ems="10"
-                android:hint="@string/receptionDate"
-                android:inputType="textPersonName"
+                android:layout_marginTop="3dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textInputLayout4" />
+                app:layout_constraintTop_toBottomOf="@+id/textInputLayout4">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/textInputEditText7"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/receptionDate" />
+            </com.google.android.material.textfield.TextInputLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
