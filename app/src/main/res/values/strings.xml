@@ -77,6 +77,6 @@
     <string name="brandNameError">Por favor, introduce una marca válida.</string>
     <string name="modelNameError">Por favor, introduce un modelo válido.</string>
     <string name="enrollmentNameError">Por favor, introduce un valor de matrícula válido.</string>
-    <string name="dateError">Por favor, introduce un formato de fecha válido (dd/mm/yyyy).</string>
+    <string name="dateError">Por favor, introduce un formato de fecha válido (mm/dd/yyyy).</string>
 
 </resources>

@@ -51,7 +51,8 @@ public class FormActivity extends AppCompatActivity implements FormInterface.Vie
     TextInputEditText enrollmentNameET;
     TextInputLayout enrollmentNameTIL;
 
-    EditText receptionDate;
+    TextInputEditText receptionDateET;
+    TextInputLayout receptionDateTIL;
 
     private Spinner spinner;
     private ArrayAdapter<String> adapter;
@@ -165,21 +166,23 @@ public class FormActivity extends AppCompatActivity implements FormInterface.Vie
             }
         });
 
-        receptionDate = findViewById(R.id.textDate);
+        receptionDateET = findViewById(R.id.textInputEditText7);
+        receptionDateTIL = findViewById(R.id.textInputLayout7);
 
-        receptionDate.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        receptionDateET.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if(!hasFocus){
-                    if(car.setReceptionDate(receptionDate.getText().toString()) == false){
-                        receptionDate.setError(presenter.getError("dateError"));
+                    if(car.setName(receptionDateET.getText().toString()) == false){
+                        receptionDateTIL.setError(presenter.getError("dateError"));
+                    }else{
+                       receptionDateTIL.setError("");
                     }
                 }else{
-                    receptionDate.setError("");
+                    //Log.d
                 }
             }
         });
-
 
         //String[] options = {"Seleccione combustible", "Otro" "Gasolina", "Diésel", "Eléctrico"};
         ArrayList<String> options = new ArrayList<>();
@@ -243,7 +246,7 @@ public class FormActivity extends AppCompatActivity implements FormInterface.Vie
 
 
         ImageView dateImage = findViewById(R.id.imageView7);
-        final EditText textDate = findViewById(R.id.textDate);
+        final EditText textDate = findViewById(R.id.textInputEditText7);
 
         calendar = Calendar.getInstance();
         Year = calendar.get(Calendar.YEAR);
@@ -256,7 +259,7 @@ public class FormActivity extends AppCompatActivity implements FormInterface.Vie
                 datePickerDialog = new DatePickerDialog(myContext, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int day) {
-                        textDate.setText(String.valueOf(day) + "/" + String.valueOf(month + 1) + "/" + String.valueOf(year));
+                        textDate.setText(String.valueOf(month + 1) + "/" + String.valueOf(day) + "/" + String.valueOf(year));
                     }
                 },Year, Month, Day);
                 datePickerDialog.show();
