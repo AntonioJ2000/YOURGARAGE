@@ -27,4 +27,16 @@ public class ListPresenter implements ListInterface.Presenter {
     public void onClickAbout(){
         view.startAboutActivity();
     }
+
+    @Override
+    public void onClickRecyclerViewItem(String id) {
+        view.startFormActivity(id);
+    }
+
+    public void onSwipeRecyclerViewItem(String id){
+        /*
+        view.removeRecyclerViewItem();
+        view.showToast("Error");
+        */
+    }
 }

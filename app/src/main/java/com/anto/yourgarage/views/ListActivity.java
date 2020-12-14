@@ -47,12 +47,14 @@ public class ListActivity extends AppCompatActivity implements ListInterface.Vie
             }
         });
 
+
+        //Crea una lista con datos de ejemplo
         items = new ArrayList<CarEntity>();
-        items.add(new CarEntity("KIA", "Carnival 2005"));
-        items.add(new CarEntity("Renault", "Megane"));
-        items.add(new CarEntity("Ferrari", "Enzo"));
-        items.add(new CarEntity("Lamborghini", "Gallardo"));
-        items.add(new CarEntity("Bugatti", "Veyron"));
+        items.add(new CarEntity("abc","KIA", "Carnival 2005"));
+        items.add(new CarEntity("2","Renault", "Megane"));
+        items.add(new CarEntity("3","Ferrari", "Enzo"));
+        items.add(new CarEntity("4","Lamborghini", "Gallardo"));
+        items.add(new CarEntity("5","Bugatti", "Veyron"));
 
 
         final RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
@@ -66,8 +68,12 @@ public class ListActivity extends AppCompatActivity implements ListInterface.Vie
             public void onClick(View v) {
                 // Acción al pulsar el elemento
                 int position = recyclerView.getChildAdapterPosition(v);
-                Toast.makeText(ListActivity.this, "Posición: " + String.valueOf(position) + " Nombre: " + items.get(position).getName() + " Modelo: " + items.get(position).getModelName(), Toast.LENGTH_SHORT)
+                /*
+                Toast.makeText(ListActivity.this, "Posición: " + String.valueOf(position) + " Nombre: " + items.get(position).getOwnerName() + " Modelo: " + items.get(position).getModelName(), Toast.LENGTH_SHORT)
                         .show();
+
+                 */
+                presenter.onClickRecyclerViewItem(items.get(position).getId());
             }
         });
 
@@ -121,6 +127,13 @@ public class ListActivity extends AppCompatActivity implements ListInterface.Vie
     }
 
     @Override
+    public void startFormActivity(String id) {
+        Intent intent = new Intent(getApplicationContext(), FormActivity.class);
+        intent.putExtra("id",id);
+        startActivity(intent);
+    }
+
+    @Override
     public void startSearchActivity(){
         Intent intent = new Intent(getApplicationContext(), SearchActivity.class);
         startActivity(intent);
@@ -131,6 +144,5 @@ public class ListActivity extends AppCompatActivity implements ListInterface.Vie
         Intent intent = new Intent(getApplicationContext(), AboutActivity.class);
         startActivity(intent);
     }
-
 
 }

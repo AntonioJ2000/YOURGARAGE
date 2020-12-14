@@ -39,7 +39,7 @@ public class CarAdapter extends RecyclerView.Adapter<CarAdapter.CarViewHolder>
 
         public void CarBind(CarEntity item) {
             //getImage();
-            ownerName.setText(item.getName());
+            ownerName.setText(item.getOwnerName());
             modelName.setText(item.getModelName());
         }
     }

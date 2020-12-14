@@ -17,6 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
@@ -25,7 +26,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -38,7 +38,10 @@ public class FormActivity extends AppCompatActivity implements FormInterface.Vie
 
     private FormInterface.Presenter presenter;
 
-    CarEntity car;
+    private CarEntity car;
+
+    private String id;
+
     TextInputEditText ownerNameET;
     TextInputLayout ownerNameTIL;
 
@@ -81,6 +84,7 @@ public class FormActivity extends AppCompatActivity implements FormInterface.Vie
             });
         }
 
+
         presenter = new FormPresenter(this);
         spinner = (Spinner) findViewById(R.id.spinner);
 
@@ -101,7 +105,7 @@ public class FormActivity extends AppCompatActivity implements FormInterface.Vie
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if(!hasFocus){
-                    if(car.setName(ownerNameET.getText().toString()) == false){
+                    if(car.setOwnerName(ownerNameET.getText().toString()) == false){
                         ownerNameTIL.setError(presenter.getError("ownerName"));
                     }else{
                         ownerNameTIL.setError("");
@@ -119,7 +123,7 @@ public class FormActivity extends AppCompatActivity implements FormInterface.Vie
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if(!hasFocus){
-                    if(car.setName(brandNameET.getText().toString()) == false){
+                    if(car.setOwnerName(brandNameET.getText().toString()) == false){
                         brandNameTIL.setError(presenter.getError("brandName"));
                     }else{
                         brandNameTIL.setError("");
@@ -137,7 +141,7 @@ public class FormActivity extends AppCompatActivity implements FormInterface.Vie
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if(!hasFocus){
-                    if(car.setName(modelNameET.getText().toString()) == false){
+                    if(car.setOwnerName(modelNameET.getText().toString()) == false){
                         modelNameTIL.setError(presenter.getError("modelName"));
                     }else{
                         modelNameTIL.setError("");
@@ -155,7 +159,7 @@ public class FormActivity extends AppCompatActivity implements FormInterface.Vie
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if(!hasFocus){
-                    if(car.setName(enrollmentNameET.getText().toString()) == false){
+                    if(car.setOwnerName(enrollmentNameET.getText().toString()) == false){
                         enrollmentNameTIL.setError(presenter.getError("enrollmentName"));
                     }else{
                         enrollmentNameTIL.setError("");
@@ -173,7 +177,7 @@ public class FormActivity extends AppCompatActivity implements FormInterface.Vie
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if(!hasFocus){
-                    if(car.setName(receptionDateET.getText().toString()) == false){
+                    if(car.setOwnerName(receptionDateET.getText().toString()) == false){
                         receptionDateTIL.setError(presenter.getError("dateError"));
                     }else{
                        receptionDateTIL.setError("");
@@ -265,6 +269,19 @@ public class FormActivity extends AppCompatActivity implements FormInterface.Vie
                 datePickerDialog.show();
             }
         });
+
+        //Pillas la id si un elemento ha sido seleccionado.
+        id = getIntent().getStringExtra("id"); //Es nulo si el boton es flotante.
+
+        if(id != null){
+            Log.d("HEY","No soy nulo");
+            //Rellenar campos.
+            ownerNameET.setText(id);
+        }else{
+            Log.d("HEY","Soy nulo");
+            //Deshabilitar el botón eliminar ya que estamos creando un objeto nuevo.
+
+        }
 
     }
 
