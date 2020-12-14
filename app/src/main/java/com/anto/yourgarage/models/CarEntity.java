@@ -1,52 +1,53 @@
 package com.anto.yourgarage.models;
 
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class CarEntity {
-    private String id;
-    private String image;
+    private String Image;
     private String ownerName;
-    private String brandName;
     private String modelName;
+    private String brandName;
     private String enrollmentName;
     private Date receptionDate;
     private String fuelType;
     private String carFault;
-    private boolean carStatusSerious;
+    private boolean carStatus;
 
+    public CarEntity(){ }
 
-    public CarEntity() {
-    }
-
-    public CarEntity(String id, String ownerName, String modelName){
-        this.id = id;
+    public CarEntity(String Image,
+                     String ownerName,
+                     String enrollmentName, String brandName,
+                     String modelName, //Date receptionDate,
+                     String fuelType, String carFault,
+                     boolean carStatus){
+       this.Image = Image;
         this.ownerName = ownerName;
+        this.enrollmentName = enrollmentName;
+        this.brandName = brandName;
         this.modelName = modelName;
-    };
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
+        //this.receptionDate = receptionDate;
+        this.fuelType = fuelType;
+        this.carFault = carFault;
+        this.carStatus = carStatus;
     }
 
     public String getImage() {
-        return image;
+        return Image;
     }
 
     public void setImage(String image) {
-        this.image = image;
+        this.Image = image;
     }
 
-    public String getOwnerName() {
+    public String getName() {
         return ownerName;
     }
 
-    public boolean setOwnerName(String name) {
+    public boolean setName(String name) {
         if (name.matches("[A-Za-z ]*")) {
             this.ownerName = ownerName;
             return true;
@@ -89,8 +90,10 @@ public class CarEntity {
         }
     }
 
-    public Date getReceptionDate() {
-        return receptionDate;
+    public String getReceptionDate() {
+        DateFormat dateFormat = new SimpleDateFormat("mm/dd/yyyy");
+        String strDate = dateFormat.format(this.receptionDate);
+        return strDate;
     }
 
     public boolean setReceptionDate(String receptionDate) {
@@ -125,12 +128,19 @@ public class CarEntity {
         this.carFault = carFault;
     }
 
-    public boolean isCarStatusSerious() {
-        return carStatusSerious;
+    public String getCarStatus() {
+        String status1 = "Grave";
+        String status2 = "No es grave";
+        if(carStatus == true){
+            return status1;
+        }else if(carStatus == false){
+            return status2;
+        }
+        return status2;
     }
 
-    public void setCarStatusSerious(boolean carStatusSerious) {
-        this.carStatusSerious = carStatusSerious;
+    public void setCarStatus(boolean carStatus) {
+        this.carStatus = carStatus;
     }
 
 }

@@ -1,5 +1,8 @@
 package com.anto.yourgarage.views;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,21 +29,49 @@ public class CarAdapter extends RecyclerView.Adapter<CarAdapter.CarViewHolder>
     public static class CarViewHolder
             extends RecyclerView.ViewHolder {
 
-        private ImageView carImage;
+        private ImageView Image;
         private TextView ownerName;
         private TextView modelName;
+        private TextView brandName;
+        private TextView enrollmentName;
+        private TextView receptionDate;
+        private TextView fuelType;
+        private TextView carFault;
+        private TextView carStatusSerious;
+
 
         public CarViewHolder(View itemView) {
             super(itemView);
-            carImage = (ImageView) itemView.findViewById(R.id.carImage);
+            Image = (ImageView) itemView.findViewById(R.id.carImage);
+
             ownerName = (TextView) itemView.findViewById(R.id.ownerName);
             modelName = (TextView) itemView.findViewById(R.id.modelName);
+            brandName = (TextView) itemView.findViewById(R.id.brandName);
+            enrollmentName = (TextView) itemView.findViewById(R.id.enrollmentName);
+            receptionDate = (TextView) itemView.findViewById(R.id.receptionDate);
+            fuelType = (TextView) itemView.findViewById(R.id.fuelType);
+            carFault = (TextView) itemView.findViewById(R.id.carFault);
+            carStatusSerious  = (TextView) itemView.findViewById(R.id.carStatus);
         }
 
-        public void CarBind(CarEntity item) {
+        public void CarBind(CarEntity car) {
             //getImage();
-            ownerName.setText(item.getOwnerName());
-            modelName.setText(item.getModelName());
+            if(!car.getImage().equals("")){
+                byte[] decodedString = Base64.decode(car.getImage(), Base64.DEFAULT);
+                Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+                Image.setImageBitmap(decodedByte);
+            }else{
+
+            }
+
+            ownerName.setText(car.getName());
+            modelName.setText(car.getModelName());
+            brandName.setText(car.getBrandName());
+            enrollmentName.setText(car.getEnrollmentName());
+            // receptionDate.setText(car.getReceptionDate());
+            fuelType.setText(car.getFuelType());
+            carFault.setText(car.getCarFault());
+            carStatusSerious.setText(car.getCarStatus());
         }
     }
 

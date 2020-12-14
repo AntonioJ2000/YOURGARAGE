@@ -31,18 +31,18 @@
         tools:text="@tools:sample/full_names" />
 
     <TextView
-        android:id="@+id/textView10"
+        android:id="@+id/carFault"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="60dp"
         android:layout_marginTop="24dp"
         android:text="TextView"
         app:layout_constraintStart_toEndOf="@+id/button"
-        app:layout_constraintTop_toBottomOf="@+id/textView8"
+        app:layout_constraintTop_toBottomOf="@+id/receptionDate"
         tools:text="@tools:sample/cities" />
 
     <TextView
-        android:id="@+id/textView8"
+        android:id="@+id/receptionDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="85dp"
@@ -64,7 +64,7 @@
         tools:text="@tools:sample/cities" />
 
     <TextView
-        android:id="@+id/textView13"
+        android:id="@+id/carStatus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="185dp"
@@ -72,12 +72,12 @@
         android:layout_marginEnd="231dp"
         android:text="TextView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textView10"
-        app:layout_constraintTop_toBottomOf="@+id/textView12"
+        app:layout_constraintStart_toEndOf="@+id/carFault"
+        app:layout_constraintTop_toBottomOf="@+id/fuelType"
         tools:text="@tools:sample/cities" />
 
     <TextView
-        android:id="@+id/modelName"
+        android:id="@+id/enrollmentName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="139dp"
@@ -90,7 +90,7 @@
         tools:text="@tools:sample/full_names" />
 
     <TextView
-        android:id="@+id/textView11"
+        android:id="@+id/modelName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="194dp"
@@ -99,11 +99,11 @@
         android:text="TextView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textView7"
-        app:layout_constraintTop_toBottomOf="@+id/modelName"
+        app:layout_constraintTop_toBottomOf="@+id/enrollmentName"
         tools:text="@tools:sample/cities" />
 
     <TextView
-        android:id="@+id/textView12"
+        android:id="@+id/fuelType"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="197dp"
@@ -111,8 +111,8 @@
         android:layout_marginEnd="231dp"
         android:text="TextView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textView8"
-        app:layout_constraintTop_toBottomOf="@+id/textView11"
+        app:layout_constraintStart_toEndOf="@+id/receptionDate"
+        app:layout_constraintTop_toBottomOf="@+id/modelName"
         tools:text="@tools:sample/cities" />
 
     <TextView
