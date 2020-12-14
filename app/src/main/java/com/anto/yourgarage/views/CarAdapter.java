@@ -61,7 +61,7 @@ public class CarAdapter extends RecyclerView.Adapter<CarAdapter.CarViewHolder>
                 Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
                 Image.setImageBitmap(decodedByte);
             }else{
-
+                Image.setImageDrawable(MyApplication.getContext().getDrawable(R.drawable.about_icon));
             }
 
             ownerName.setText(car.getName());

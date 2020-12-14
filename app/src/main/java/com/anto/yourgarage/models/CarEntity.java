@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class CarEntity {
+    private String id;
     private String Image;
     private String ownerName;
     private String modelName;
@@ -18,13 +19,14 @@ public class CarEntity {
 
     public CarEntity(){ }
 
-    public CarEntity(String Image,
+    public CarEntity(String id, String Image,
                      String ownerName,
                      String enrollmentName, String brandName,
                      String modelName, //Date receptionDate,
                      String fuelType, String carFault,
                      boolean carStatus){
-       this.Image = Image;
+        this.id = id;
+        this.Image = Image;
         this.ownerName = ownerName;
         this.enrollmentName = enrollmentName;
         this.brandName = brandName;
@@ -33,6 +35,14 @@ public class CarEntity {
         this.fuelType = fuelType;
         this.carFault = carFault;
         this.carStatus = carStatus;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getImage() {

@@ -105,7 +105,7 @@ public class FormActivity extends AppCompatActivity implements FormInterface.Vie
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if(!hasFocus){
-                    if(car.setOwnerName(ownerNameET.getText().toString()) == false){
+                    if(car.setName(ownerNameET.getText().toString()) == false){
                         ownerNameTIL.setError(presenter.getError("ownerName"));
                     }else{
                         ownerNameTIL.setError("");
@@ -123,7 +123,7 @@ public class FormActivity extends AppCompatActivity implements FormInterface.Vie
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if(!hasFocus){
-                    if(car.setOwnerName(brandNameET.getText().toString()) == false){
+                    if(car.setBrandName(brandNameET.getText().toString()) == false){
                         brandNameTIL.setError(presenter.getError("brandName"));
                     }else{
                         brandNameTIL.setError("");
@@ -141,7 +141,7 @@ public class FormActivity extends AppCompatActivity implements FormInterface.Vie
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if(!hasFocus){
-                    if(car.setOwnerName(modelNameET.getText().toString()) == false){
+                    if(car.setName(modelNameET.getText().toString()) == false){
                         modelNameTIL.setError(presenter.getError("modelName"));
                     }else{
                         modelNameTIL.setError("");
@@ -159,7 +159,7 @@ public class FormActivity extends AppCompatActivity implements FormInterface.Vie
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if(!hasFocus){
-                    if(car.setOwnerName(enrollmentNameET.getText().toString()) == false){
+                    if(car.setName(enrollmentNameET.getText().toString()) == false){
                         enrollmentNameTIL.setError(presenter.getError("enrollmentName"));
                     }else{
                         enrollmentNameTIL.setError("");
@@ -177,7 +177,7 @@ public class FormActivity extends AppCompatActivity implements FormInterface.Vie
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if(!hasFocus){
-                    if(car.setOwnerName(receptionDateET.getText().toString()) == false){
+                    if(car.setName(receptionDateET.getText().toString()) == false){
                         receptionDateTIL.setError(presenter.getError("dateError"));
                     }else{
                        receptionDateTIL.setError("");
