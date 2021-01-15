@@ -3,6 +3,8 @@ package com.anto.yourgarage.views;
 import android.app.Application;
 import android.content.Context;
 
+import io.realm.Realm;
+
 public class MyApplication extends Application {
     private static Context sContext;
 
@@ -11,6 +13,7 @@ public class MyApplication extends Application {
         super.onCreate();
         sContext =   getApplicationContext();
 
+        Realm.init(this);
     }
 
     public static Context getContext() {

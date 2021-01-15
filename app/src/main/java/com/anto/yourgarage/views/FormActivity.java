@@ -1,20 +1,32 @@
 package com.anto.yourgarage.views;
 
+import android.Manifest;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 
 import com.anto.yourgarage.R;
 import com.anto.yourgarage.interfaces.FormInterface;
 import com.anto.yourgarage.models.CarEntity;
 import com.anto.yourgarage.presenters.FormPresenter;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 
 import android.util.Log;
@@ -30,6 +42,9 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -38,9 +53,16 @@ public class FormActivity extends AppCompatActivity implements FormInterface.Vie
 
     private FormInterface.Presenter presenter;
 
+    private static final int REQUEST_SELECT_IMAGE = 201;
+    final private int CODE_WRITE_EXTERNAL_STORAGE_PERMISSION = 123;
+
+    private ConstraintLayout constraintLayoutFormActivity;
+
     private CarEntity car;
 
     private String id;
+
+    ImageView imageView;
 
     TextInputEditText ownerNameET;
     TextInputLayout ownerNameTIL;
@@ -56,6 +78,9 @@ public class FormActivity extends AppCompatActivity implements FormInterface.Vie
 
     TextInputEditText receptionDateET;
     TextInputLayout receptionDateTIL;
+
+    TextInputEditText carFaultET;
+    TextInputLayout carFaultTIL;
 
     private Spinner spinner;
     private ArrayAdapter<String> adapter;
@@ -88,6 +113,25 @@ public class FormActivity extends AppCompatActivity implements FormInterface.Vie
         presenter = new FormPresenter(this);
         spinner = (Spinner) findViewById(R.id.spinner);
 
+
+        Button addImage = findViewById(R.id.addImage);
+        addImage.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                presenter.addImage();
+            }
+        });
+
+        Button deleteImage = findViewById(R.id.deleteImage);
+        deleteImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                imageView = findViewById(R.id.imageView);
+                imageView.setImageDrawable(MyApplication.getContext().getDrawable(R.drawable.about_icon));
+            }
+        });
+
+
+
         ImageView categoryImage = findViewById(R.id.infoImage);
         categoryImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -108,7 +152,8 @@ public class FormActivity extends AppCompatActivity implements FormInterface.Vie
                     if(car.setName(ownerNameET.getText().toString()) == false){
                         ownerNameTIL.setError(presenter.getError("ownerName"));
                     }else{
-                        ownerNameTIL.setError("");
+                        ownerNameTIL.setError("HOLA AQUI ESTOY JEJE SOY BOBARDO");
+                        System.out.println(car.getName());
                     }
                 }else{
                     //Log.d
@@ -141,7 +186,7 @@ public class FormActivity extends AppCompatActivity implements FormInterface.Vie
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if(!hasFocus){
-                    if(car.setName(modelNameET.getText().toString()) == false){
+                    if(car.setModelName(modelNameET.getText().toString()) == false){
                         modelNameTIL.setError(presenter.getError("modelName"));
                     }else{
                         modelNameTIL.setError("");
@@ -159,7 +204,7 @@ public class FormActivity extends AppCompatActivity implements FormInterface.Vie
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if(!hasFocus){
-                    if(car.setName(enrollmentNameET.getText().toString()) == false){
+                    if(car.setEnrollmentName(enrollmentNameET.getText().toString()) == false){
                         enrollmentNameTIL.setError(presenter.getError("enrollmentName"));
                     }else{
                         enrollmentNameTIL.setError("");
@@ -177,7 +222,7 @@ public class FormActivity extends AppCompatActivity implements FormInterface.Vie
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if(!hasFocus){
-                    if(car.setName(receptionDateET.getText().toString()) == false){
+                    if(car.setReceptionDate(receptionDateET.getText().toString()) == false){
                         receptionDateTIL.setError(presenter.getError("dateError"));
                     }else{
                        receptionDateTIL.setError("");
@@ -187,6 +232,23 @@ public class FormActivity extends AppCompatActivity implements FormInterface.Vie
                 }
             }
         });
+
+        carFaultET = findViewById(R.id.textInputEditText5);
+        carFaultTIL = findViewById(R.id.textInputLayout5);
+
+        carFaultET.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(!hasFocus){
+                    if(car.setCarFault(carFaultET.getText().toString()) == false){
+                        carFaultTIL.setError(presenter.getError("faultError"));
+                    }else{
+                        receptionDateTIL.setError("");
+                    }
+                }
+            }
+        });
+
 
         //String[] options = {"Seleccione combustible", "Otro" "Gasolina", "Diésel", "Eléctrico"};
         ArrayList<String> options = new ArrayList<>();
@@ -226,7 +288,18 @@ public class FormActivity extends AppCompatActivity implements FormInterface.Vie
         saveCar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                presenter.onClickSaveCar();
+                //Hacer con todos los campos.
+                if(car.setName(ownerNameET.getText().toString()) &&
+                        car.setModelName(modelNameET.getText().toString()) &&
+                        car.setBrandName(brandNameET.getText().toString()) &&
+                        car.setEnrollmentName(enrollmentNameET.getText().toString()) &&
+                        car.setReceptionDate(receptionDateET.getText().toString()) &&
+                        spinner.getSelectedItemPosition() != 0 &&
+                        car.setCarFault(carFaultET.getText().toString())){
+                        presenter.onClickSaveCar(car);
+                }
+
+
             }
         });
 
@@ -276,7 +349,9 @@ public class FormActivity extends AppCompatActivity implements FormInterface.Vie
         if(id != null){
             Log.d("HEY","No soy nulo");
             //Rellenar campos.
-            ownerNameET.setText(id);
+
+            //ownerNameET.setText(id);
+
         }else{
             Log.d("HEY","Soy nulo");
             //Deshabilitar el botón eliminar ya que estamos creando un objeto nuevo.
@@ -284,6 +359,18 @@ public class FormActivity extends AppCompatActivity implements FormInterface.Vie
         }
 
     }
+
+    private void selectPicture(){
+        // Se le pide al sistema una imagen del dispositivo
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(
+                Intent.createChooser(intent, getResources().getString(R.string.choose_picture)),
+                REQUEST_SELECT_IMAGE);
+    }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -323,5 +410,65 @@ public class FormActivity extends AppCompatActivity implements FormInterface.Vie
     @Override
     public void closeFormActivity() {
         finish();
+    }
+
+    @Override
+    public void addImage() {
+        int WriteExternalStoragePermission = ContextCompat.checkSelfPermission(myContext, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        Log.d("MainActivity", "WriteExternalStoragePermission: " + WriteExternalStoragePermission);
+        if(WriteExternalStoragePermission != -1){
+            Toast.makeText(FormActivity.this, "Por favor, seleccione una imagen", Toast.LENGTH_SHORT).show();
+            selectPicture();
+        } else {
+            if (WriteExternalStoragePermission != PackageManager.PERMISSION_GRANTED) {
+                // Permiso denegado
+                // A partir de Marshmallow (6.0) se pide aceptar o rechazar el permiso en tiempo de ejecución
+                // En las versiones anteriores no es posible hacerlo
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    ActivityCompat.requestPermissions(FormActivity.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, CODE_WRITE_EXTERNAL_STORAGE_PERMISSION);
+                    // Una vez que se pide aceptar o rechazar el permiso se ejecuta el método "onRequestPermissionsResult" para manejar la respuesta
+                    // Si el usuario marca "No preguntar más" no se volverá a mostrar este diálogo
+                } else {
+                    Snackbar.make(constraintLayoutFormActivity, getResources().getString(R.string.write_permission_denied), Snackbar.LENGTH_LONG)
+                            .show();
+                }
+            } else {
+                // Permiso aceptado
+                Snackbar.make(constraintLayoutFormActivity, getResources().getString(R.string.write_permission_granted), Snackbar.LENGTH_LONG)
+                        .show();
+
+            }
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
+            case (REQUEST_SELECT_IMAGE):
+                if (resultCode == Activity.RESULT_OK) {
+                    // Se carga la imagen desde un objeto Bitmap
+                    Uri selectedImage = data.getData();
+                    String selectedPath = selectedImage.getPath();
+
+                    if (selectedPath != null) {
+                        // Se leen los bytes de la imagen
+                        InputStream imageStream = null;
+                        try {
+                            imageStream = getContentResolver().openInputStream(selectedImage);
+                        } catch (FileNotFoundException e) {
+                            e.printStackTrace();
+                        }
+
+                        // Se transformam los bytes de la imagen a un Bitmap
+                        Bitmap bmp = BitmapFactory.decodeStream(imageStream);
+
+                        // Se carga el Bitmap en el ImageView
+                        imageView = findViewById(R.id.imageView);
+                        imageView.setImageBitmap(bmp);
+                    }
+                }
+                break;
+        }
     }
 }

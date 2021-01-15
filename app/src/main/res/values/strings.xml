@@ -78,5 +78,11 @@
     <string name="modelNameError">Por favor, introduce un modelo válido.</string>
     <string name="enrollmentNameError">Por favor, introduce un valor de matrícula válido.</string>
     <string name="dateError">Por favor, introduce un formato de fecha válido (mm/dd/yyyy).</string>
+    <string name="internet_permission_denied">Lo sentimos, no tienes permiso para esto.</string>
+    <string name="internet_permission_granted">Ya tienes los permisos necesarios.</string>
+    <string name="write_permission_denied">Has denegado el permiso de escritura.</string>
+    <string name="write_permission_granted">¡Permiso concedido!</string>
+    <string name="choose_picture">Elija una foto</string>
+    <string name="faultError">Introduzca un valor válido</string>
 
 </resources>

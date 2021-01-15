@@ -43,7 +43,6 @@ public class CarAdapter extends RecyclerView.Adapter<CarAdapter.CarViewHolder>
         public CarViewHolder(View itemView) {
             super(itemView);
             Image = (ImageView) itemView.findViewById(R.id.carImage);
-
             ownerName = (TextView) itemView.findViewById(R.id.ownerName);
             modelName = (TextView) itemView.findViewById(R.id.modelName);
             brandName = (TextView) itemView.findViewById(R.id.brandName);
@@ -55,7 +54,6 @@ public class CarAdapter extends RecyclerView.Adapter<CarAdapter.CarViewHolder>
         }
 
         public void CarBind(CarEntity car) {
-            //getImage();
             if(!car.getImage().equals("")){
                 byte[] decodedString = Base64.decode(car.getImage(), Base64.DEFAULT);
                 Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
@@ -68,7 +66,7 @@ public class CarAdapter extends RecyclerView.Adapter<CarAdapter.CarViewHolder>
             modelName.setText(car.getModelName());
             brandName.setText(car.getBrandName());
             enrollmentName.setText(car.getEnrollmentName());
-            // receptionDate.setText(car.getReceptionDate());
+            receptionDate.setText(car.getReceptionDate());
             fuelType.setText(car.getFuelType());
             carFault.setText(car.getCarFault());
             carStatusSerious.setText(car.getCarStatus());

@@ -5,8 +5,14 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class CarEntity {
+import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
+
+public class CarEntity extends RealmObject {
+
+    @PrimaryKey
     private String id;
+
     private String Image;
     private String ownerName;
     private String modelName;
@@ -22,7 +28,7 @@ public class CarEntity {
     public CarEntity(String id, String Image,
                      String ownerName,
                      String enrollmentName, String brandName,
-                     String modelName, //Date receptionDate,
+                     String modelName, Date receptionDate,
                      String fuelType, String carFault,
                      boolean carStatus){
         this.id = id;
@@ -31,7 +37,7 @@ public class CarEntity {
         this.enrollmentName = enrollmentName;
         this.brandName = brandName;
         this.modelName = modelName;
-        //this.receptionDate = receptionDate;
+        this.receptionDate = receptionDate;
         this.fuelType = fuelType;
         this.carFault = carFault;
         this.carStatus = carStatus;
@@ -59,7 +65,7 @@ public class CarEntity {
 
     public boolean setName(String name) {
         if (name.matches("[A-Za-z ]*")) {
-            this.ownerName = ownerName;
+            this.ownerName = name;
             return true;
         } else {
             return false;
@@ -83,8 +89,9 @@ public class CarEntity {
         return modelName;
     }
 
-    public void setModelName(String modelName) {
+    public boolean setModelName(String modelName) {
             this.modelName = modelName;
+            return true;
     }
 
     public String getEnrollmentName() {
@@ -134,8 +141,9 @@ public class CarEntity {
         return carFault;
     }
 
-    public void setCarFault(String carFault) {
+    public boolean setCarFault(String carFault) {
         this.carFault = carFault;
+        return true;
     }
 
     public String getCarStatus() {

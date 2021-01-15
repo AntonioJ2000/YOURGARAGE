@@ -2,20 +2,24 @@ package com.anto.yourgarage.presenters;
 
 import com.anto.yourgarage.R;
 import com.anto.yourgarage.interfaces.FormInterface;
+import com.anto.yourgarage.models.CarEntity;
+import com.anto.yourgarage.models.CarModel;
 import com.anto.yourgarage.views.MyApplication;
 
 
 public class FormPresenter implements FormInterface.Presenter {
 
     private FormInterface.View view;
+    private CarModel carModel;
 
     public FormPresenter(FormInterface.View view){
         this.view = view;
+        carModel = new CarModel();
     }
 
     @Override
-    public void onClickSaveCar() {
-        view.closeFormActivity();
+    public void addImage() {
+        view.addImage();
     }
 
 
@@ -42,7 +46,24 @@ public class FormPresenter implements FormInterface.Presenter {
             case "dateError":
                 error_msg = MyApplication.getContext().getResources().getString(R.string.dateError);
                 break;
+
+            case "faultError":
+                error_msg = MyApplication.getContext().getResources().getString(R.string.faultError);
         }
         return error_msg;
+    }
+
+    @Override
+    public void onClickSaveCar(CarEntity car) {
+        System.out.println("EEEEEEEEEEEEEEEEEEEEEEEEEEEE");
+        if(CarModel.insert(car)){
+
+            System.out.println("EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
+            view.closeFormActivity();
+        }else{
+
+            //Mostrar error en el formulario.
+        }
+
     }
 }
