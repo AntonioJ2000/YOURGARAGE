@@ -4,7 +4,10 @@ import com.anto.yourgarage.R;
 import com.anto.yourgarage.interfaces.FormInterface;
 import com.anto.yourgarage.models.CarEntity;
 import com.anto.yourgarage.models.CarModel;
+import com.anto.yourgarage.views.CarAdapter;
 import com.anto.yourgarage.views.MyApplication;
+
+import java.util.ArrayList;
 
 
 public class FormPresenter implements FormInterface.Presenter {
@@ -53,17 +56,30 @@ public class FormPresenter implements FormInterface.Presenter {
         return error_msg;
     }
 
+
     @Override
     public void onClickSaveCar(CarEntity car) {
-        System.out.println("EEEEEEEEEEEEEEEEEEEEEEEEEEEE");
         if(CarModel.insert(car)){
-
-            System.out.println("EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
             view.closeFormActivity();
         }else{
 
             //Mostrar error en el formulario.
         }
-
     }
+
+    @Override
+    public void onClickUpdateCar(CarEntity car) {
+        if(CarModel.update(car)){
+            view.closeFormActivity();
+        }
+    }
+
+    @Override
+    public ArrayList<String> getAllFuelTypes() {
+        ArrayList<String> fuelTypes = new ArrayList<>();
+        fuelTypes = CarModel.getAllSpinnerItems();
+
+        return fuelTypes;
+    }
+
 }

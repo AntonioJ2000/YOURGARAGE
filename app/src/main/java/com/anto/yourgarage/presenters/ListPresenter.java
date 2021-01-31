@@ -1,6 +1,10 @@
 package com.anto.yourgarage.presenters;
 
 import com.anto.yourgarage.interfaces.ListInterface;
+import com.anto.yourgarage.models.CarEntity;
+import com.anto.yourgarage.models.CarModel;
+
+import java.util.ArrayList;
 
 public class ListPresenter implements ListInterface.Presenter {
 
@@ -31,6 +35,14 @@ public class ListPresenter implements ListInterface.Presenter {
     @Override
     public void onClickRecyclerViewItem(String id) {
         view.startFormActivity(id);
+    }
+
+    @Override
+    public ArrayList<CarEntity> getAllItemsSumarize() {
+        ArrayList<CarEntity> myCars;
+        myCars = CarModel.getAllSummarize();
+
+        return myCars;
     }
 
     public void onSwipeRecyclerViewItem(String id){

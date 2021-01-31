@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -17,6 +18,7 @@ import android.os.Bundle;
 import com.anto.yourgarage.R;
 import com.anto.yourgarage.interfaces.FormInterface;
 import com.anto.yourgarage.models.CarEntity;
+import com.anto.yourgarage.models.CarModel;
 import com.anto.yourgarage.presenters.FormPresenter;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
@@ -29,6 +31,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 
+import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -41,12 +44,16 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Calendar;
+
+import io.realm.Realm;
 
 
 public class FormActivity extends AppCompatActivity implements FormInterface.View {
@@ -152,8 +159,7 @@ public class FormActivity extends AppCompatActivity implements FormInterface.Vie
                     if(car.setName(ownerNameET.getText().toString()) == false){
                         ownerNameTIL.setError(presenter.getError("ownerName"));
                     }else{
-                        ownerNameTIL.setError("HOLA AQUI ESTOY JEJE SOY BOBARDO");
-                        System.out.println(car.getName());
+                        brandNameTIL.setError("");
                     }
                 }else{
                     //Log.d
@@ -249,14 +255,18 @@ public class FormActivity extends AppCompatActivity implements FormInterface.Vie
             }
         });
 
+        final ToggleButton carStatus = findViewById(R.id.estadoButton);
+        carStatus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(carStatus.isChecked()){
+                    car.setCarStatus(true);
+                }
+            }
+        });
 
         //String[] options = {"Seleccione combustible", "Otro" "Gasolina", "Diésel", "Eléctrico"};
-        ArrayList<String> options = new ArrayList<>();
-        options.add(getString(R.string.spinnerSelectItem));
-        options.add(getString(R.string.spinnerSelectNew));
-        options.add(getString(R.string.spinnerFuelType1));
-        options.add(getString(R.string.spinnerFuelType2));
-        options.add(getString(R.string.spinnerFuelType3));
+        ArrayList<String> options = presenter.getAllFuelTypes();
 
         adapter = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item, options);
         adapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
@@ -271,6 +281,7 @@ public class FormActivity extends AppCompatActivity implements FormInterface.Vie
 
                 }else if(pos > 1){
                     Toast.makeText(spinner.getContext(), "Has seleccionado " + spinner.getItemAtPosition(pos).toString(),Toast.LENGTH_SHORT).show();
+                    car.setFuelType(spinner.getItemAtPosition(pos).toString());
 
                 }else{
                     Toast.makeText(spinner.getContext(), "Nada seleccionado", Toast.LENGTH_LONG).cancel();
@@ -288,7 +299,43 @@ public class FormActivity extends AppCompatActivity implements FormInterface.Vie
         saveCar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Hacer con todos los campos.
+
+                if(id != null){
+                    //car = CarModel.getCarByID(id);
+                    CarEntity newCar = new CarEntity();
+
+                        if(newCar.setName(ownerNameET.getText().toString()) &&
+                                newCar.setModelName(modelNameET.getText().toString()) &&
+                                newCar.setBrandName(brandNameET.getText().toString()) &&
+                                newCar.setEnrollmentName(enrollmentNameET.getText().toString()) &&
+                                newCar.setReceptionDate(receptionDateET.getText().toString()) &&
+                                spinner.getSelectedItemPosition() != 0 &&
+                                newCar.setCarFault(carFaultET.getText().toString())){
+
+
+                            imageView = findViewById(R.id.imageView);
+                            if(imageView.getDrawable() == null || ((BitmapDrawable)imageView.getDrawable()).getBitmap() == null){
+                                newCar.setImage("");
+                            }else{
+                                ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+                                ((BitmapDrawable)imageView.getDrawable()).getBitmap().compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
+                                byte[] byteArray = byteArrayOutputStream.toByteArray();
+                                String imageInBase64 = Base64.encodeToString(byteArray, Base64.DEFAULT);
+                                newCar.setImage(imageInBase64);
+                            }
+                            newCar.setFuelType(spinner.getSelectedItem().toString());
+
+                            if(carStatus.isChecked()){
+                                newCar.setCarStatus(true);
+                                System.out.println(newCar.getCarStatus());
+                            }
+
+
+                            newCar.setId(id);
+                            System.out.println(newCar.getCarStatus());
+                            presenter.onClickUpdateCar(newCar);
+                        }
+                }else{
                 if(car.setName(ownerNameET.getText().toString()) &&
                         car.setModelName(modelNameET.getText().toString()) &&
                         car.setBrandName(brandNameET.getText().toString()) &&
@@ -296,10 +343,23 @@ public class FormActivity extends AppCompatActivity implements FormInterface.Vie
                         car.setReceptionDate(receptionDateET.getText().toString()) &&
                         spinner.getSelectedItemPosition() != 0 &&
                         car.setCarFault(carFaultET.getText().toString())){
-                        presenter.onClickSaveCar(car);
+
+                    imageView = findViewById(R.id.imageView);
+                    if(imageView.getDrawable() == null || ((BitmapDrawable)imageView.getDrawable()).getBitmap() == null){
+                        car.setImage("");
+                    }else{
+                        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+                        ((BitmapDrawable)imageView.getDrawable()).getBitmap().compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
+                        byte[] byteArray = byteArrayOutputStream.toByteArray();
+                        String imageInBase64 = Base64.encodeToString(byteArray, Base64.DEFAULT);
+                        car.setImage(imageInBase64);
+                    }
+                    car.setFuelType(spinner.getSelectedItem().toString());
+
+                    presenter.onClickSaveCar(car);
+                    }
+
                 }
-
-
             }
         });
 
@@ -336,7 +396,7 @@ public class FormActivity extends AppCompatActivity implements FormInterface.Vie
                 datePickerDialog = new DatePickerDialog(myContext, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int day) {
-                        textDate.setText(String.valueOf(month + 1) + "/" + String.valueOf(day) + "/" + String.valueOf(year));
+                        textDate.setText(String.valueOf(day) + "/" + String.valueOf(month + 1) + "/" + String.valueOf(year));
                     }
                 },Year, Month, Day);
                 datePickerDialog.show();
@@ -348,16 +408,51 @@ public class FormActivity extends AppCompatActivity implements FormInterface.Vie
 
         if(id != null){
             Log.d("HEY","No soy nulo");
-            //Rellenar campos.
+            CarEntity myCar = CarModel.getCarByID(id);
 
-            //ownerNameET.setText(id);
+            //Rellenar campos.
+            imageView = findViewById(R.id.imageView);
+            if(!myCar.getImage().equals("")){
+                byte[] decodedString = Base64.decode(myCar.getImage(), Base64.DEFAULT);
+                Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+                imageView.setImageBitmap(decodedByte);
+            }else{
+                imageView.setImageDrawable(MyApplication.getContext().getDrawable(R.drawable.about_icon));
+            }
+
+            ownerNameET.setText(myCar.getName());
+            brandNameET.setText(myCar.getBrandName());
+            modelNameET.setText(myCar.getModelName());
+            spinner.setSelection(getIndex(spinner, myCar.getFuelType()));
+            enrollmentNameET.setText(myCar.getEnrollmentName());
+            receptionDateET.setText(myCar.getReceptionDate());
+
+            if(myCar.getCarStatus() == "Grave"){
+                 carStatus.setChecked(true);
+            } else {
+                carStatus.setChecked(false);
+            }
+            carFaultET.setText(myCar.getCarFault());
 
         }else{
             Log.d("HEY","Soy nulo");
             //Deshabilitar el botón eliminar ya que estamos creando un objeto nuevo.
+            deleteCar.setEnabled(false);
 
         }
 
+    }
+
+    private int getIndex(Spinner spinner, String myString){
+
+        int index = 0;
+
+        for (int i=0;i<spinner.getCount();i++){
+            if (spinner.getItemAtPosition(i).equals(myString)){
+                index = i;
+            }
+        }
+        return index;
     }
 
     private void selectPicture(){
@@ -369,9 +464,7 @@ public class FormActivity extends AppCompatActivity implements FormInterface.Vie
                 Intent.createChooser(intent, getResources().getString(R.string.choose_picture)),
                 REQUEST_SELECT_IMAGE);
     }
-
-
-
+    
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.

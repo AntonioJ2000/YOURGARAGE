@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 
 import io.realm.Realm;
+import io.realm.RealmConfiguration;
 
 public class MyApplication extends Application {
     private static Context sContext;
@@ -14,6 +15,12 @@ public class MyApplication extends Application {
         sContext =   getApplicationContext();
 
         Realm.init(this);
+        RealmConfiguration config = new RealmConfiguration
+                .Builder()
+                .allowQueriesOnUiThread(true)
+                .allowWritesOnUiThread(true)
+                .build();
+        Realm.setDefaultConfiguration(config);
     }
 
     public static Context getContext() {

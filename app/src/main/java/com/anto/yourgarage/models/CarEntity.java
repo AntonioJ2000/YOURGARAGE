@@ -108,15 +108,15 @@ public class CarEntity extends RealmObject {
     }
 
     public String getReceptionDate() {
-        DateFormat dateFormat = new SimpleDateFormat("mm/dd/yyyy");
+        DateFormat dateFormat = new SimpleDateFormat("dd/mm/yyyy");
         String strDate = dateFormat.format(this.receptionDate);
         return strDate;
     }
 
     public boolean setReceptionDate(String receptionDate) {
         boolean result = false;
-        SimpleDateFormat newDate = new SimpleDateFormat("mm/dd/yyyy");
-        String RegEx = "^(0[1-9]|1[012])[- /.] (0[1-9]|[12][0-9]|3[01])[- /.] (19|20)\\d\\d$";
+        SimpleDateFormat newDate = new SimpleDateFormat("dd/mm/yyyy");
+        String RegEx = "^(?:(?:(?:0?[1-9]|1\\d|2[0-8])[/](?:0?[1-9]|1[0-2])|(?:29|30)[/](?:0?[13-9]|1[0-2])|31[/](?:0?[13578]|1[02]))[/](?:0{2,3}[1-9]|0{1,2}[1-9]\\d|0?[1-9]\\d{2}|[1-9]\\d{3})|29[/]0?2[/](?:\\d{1,2}(?:0[48]|[2468][048]|[13579][26])|(?:0?[48]|[13579][26]|[2468][048])00))$";
 
         if(receptionDate.matches(RegEx)){
             try {

@@ -1,5 +1,9 @@
 package com.anto.yourgarage.interfaces;
 
+import com.anto.yourgarage.models.CarEntity;
+
+import java.util.ArrayList;
+
 public interface ListInterface {
 
     public interface View{
@@ -7,7 +11,7 @@ public interface ListInterface {
         void startFormActivity(String id);
         void startSearchActivity();
         void startAboutActivity();
-
+        ArrayList<CarEntity> getAllItemsSumarize();
 
     }
 
@@ -16,6 +20,7 @@ public interface ListInterface {
         void onClickSearch();
         void onClickAbout();
         void onClickRecyclerViewItem(String id);
+        ArrayList<CarEntity> getAllItemsSumarize();
     }
 
 }
