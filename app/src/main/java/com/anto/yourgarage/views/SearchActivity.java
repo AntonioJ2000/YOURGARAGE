@@ -76,11 +76,7 @@ public class SearchActivity extends AppCompatActivity implements SearchInterface
 
         presenter = new SearchPresenter(this);
         spinner = (Spinner) findViewById(R.id.searchSpinner);
-        ArrayList<String> options = new ArrayList<>();
-        options.add(getString(R.string.spinnerSelectItem));
-        options.add(getString(R.string.spinnerFuelType1));
-        options.add(getString(R.string.spinnerFuelType2));
-        options.add(getString(R.string.spinnerFuelType3));
+        ArrayList<String> options = presenter.getAllFuelTypesForSearch();
 
         adapter = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item, options);
         adapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
@@ -112,6 +108,17 @@ public class SearchActivity extends AppCompatActivity implements SearchInterface
         });
     }
 
+    private int getIndex(Spinner spinner, String myString){
+        int index = 0;
+
+        for (int i=0;i<spinner.getCount();i++){
+            if (spinner.getItemAtPosition(i).equals(myString)){
+                index = i;
+            }
+        }
+        return index;
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -123,4 +130,7 @@ public class SearchActivity extends AppCompatActivity implements SearchInterface
     public void closeSearchActivity() {
         finish();
     }
+
+
+
 }

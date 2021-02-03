@@ -21,6 +21,7 @@ public interface ListInterface {
         void onClickAbout();
         void onClickRecyclerViewItem(String id);
         ArrayList<CarEntity> getAllItemsSumarize();
+        void deleteCarBySwipe(String id);
     }
 
 }

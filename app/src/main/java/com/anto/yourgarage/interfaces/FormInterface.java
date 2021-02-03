@@ -17,6 +17,7 @@ public interface FormInterface {
         String getError(String error_code);
         void onClickUpdateCar(CarEntity car);
         ArrayList<String> getAllFuelTypes();
+        void deleteCar(String id);
 
     }
 

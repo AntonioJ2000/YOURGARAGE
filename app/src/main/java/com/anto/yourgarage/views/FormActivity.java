@@ -369,14 +369,28 @@ public class FormActivity extends AppCompatActivity implements FormInterface.Vie
         builder.setTitle("Eliminar coche");
         builder.setMessage("¿Estás seguro de que quieres eliminar el coche seleccionado?");
 
-        builder.setPositiveButton("Eliminar", null);
-        builder.setNegativeButton("Cancelar", null);
+        builder.setPositiveButton("Eliminar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                presenter.deleteCar(id);
+                closeFormActivity();
+            }
+        });
+
+        builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
         final AlertDialog dialog = builder.create();
 
         deleteCar.setOnClickListener(new View.OnClickListener() {
               @Override
               public void onClick(View v) {
                   dialog.show();
+
               }
         });
 

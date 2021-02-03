@@ -1,6 +1,9 @@
 package com.anto.yourgarage.presenters;
 ;
 import com.anto.yourgarage.interfaces.SearchInterface;
+import com.anto.yourgarage.models.CarModel;
+
+import java.util.ArrayList;
 
 public class SearchPresenter implements SearchInterface.Presenter {
     private SearchInterface.View view;
@@ -13,5 +16,13 @@ public class SearchPresenter implements SearchInterface.Presenter {
     @Override
     public void onClickSearchCar() {
         view.closeSearchActivity();
+    }
+
+    @Override
+    public ArrayList<String> getAllFuelTypesForSearch() {
+        ArrayList<String> fuelTypes = new ArrayList<>();
+        fuelTypes = CarModel.getAllSpinnerItemsForSearch();
+
+        return fuelTypes;
     }
 }

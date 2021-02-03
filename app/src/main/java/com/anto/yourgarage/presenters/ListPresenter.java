@@ -45,6 +45,11 @@ public class ListPresenter implements ListInterface.Presenter {
         return myCars;
     }
 
+    @Override
+    public void deleteCarBySwipe(String id) {
+        CarModel.delete(id);
+    }
+
     public void onSwipeRecyclerViewItem(String id){
         /*
         view.removeRecyclerViewItem();

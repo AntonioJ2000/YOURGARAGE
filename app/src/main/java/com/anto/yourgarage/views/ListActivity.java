@@ -29,6 +29,7 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.text.ParseException;
@@ -45,6 +46,9 @@ public class ListActivity extends AppCompatActivity implements ListInterface.Vie
     final private int CODE_WRITE_EXTERNAL_STORAGE_PERMISSION=123;
     private Context myContext;
     private ConstraintLayout constraintLayoutListActivity;
+    private TextView itemText;
+    private TextView itemTextLand;
+    private int numberOfItems;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -114,6 +118,9 @@ public class ListActivity extends AppCompatActivity implements ListInterface.Vie
         super.onResume();
 
         items = presenter.getAllItemsSumarize();
+        numberOfItems = items.size();
+        itemText = findViewById(R.id.textView3);
+        itemText.setText("La lista contiene "+ numberOfItems + " elementos");
 
         final RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
 
@@ -147,7 +154,12 @@ public class ListActivity extends AppCompatActivity implements ListInterface.Vie
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder target, int i) {
                 int position = target.getAdapterPosition();
-                System.out.println(position);
+                /**
+                 System.out.println(position);
+                 System.out.println(items.get(position).getName());
+                 System.out.println(items.get(position).getId());
+                 */
+                presenter.deleteCarBySwipe((items.get(position)).getId());
                 items.remove(position);
                 adaptador.notifyDataSetChanged();
                 Toast.makeText(ListActivity.this, "El elemento " + position +" ha sido borrado con éxito", Toast.LENGTH_SHORT).show();

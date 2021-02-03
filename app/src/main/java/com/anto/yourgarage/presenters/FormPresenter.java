@@ -82,4 +82,9 @@ public class FormPresenter implements FormInterface.Presenter {
         return fuelTypes;
     }
 
+    @Override
+    public void deleteCar(String id) {
+        CarModel.delete(id);
+    }
+
 }
