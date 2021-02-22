@@ -2,7 +2,9 @@ package com.anto.yourgarage.interfaces;
 
 import com.anto.yourgarage.models.CarEntity;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Date;
 
 public interface ListInterface {
 
@@ -22,6 +24,8 @@ public interface ListInterface {
         void onClickRecyclerViewItem(String id);
         ArrayList<CarEntity> getAllItemsSumarize();
         void deleteCarBySwipe(String id);
+        ArrayList<CarEntity> getItemsFiltered(String ownerName, Date receptionDate, String fuelType);
+        ArrayList<String> getFuelTypes();
     }
 
 }

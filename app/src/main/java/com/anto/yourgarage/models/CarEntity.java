@@ -99,7 +99,7 @@ public class CarEntity extends RealmObject {
     }
 
     public boolean setEnrollmentName(String enrollmentName) {
-        if(enrollmentName.matches(".{1,8}$.*")){
+        if(enrollmentName.matches(".{1,10}$.*")){
             this.enrollmentName = enrollmentName;
             return true;
         }else{

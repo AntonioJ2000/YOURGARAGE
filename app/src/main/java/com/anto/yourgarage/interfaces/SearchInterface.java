@@ -6,6 +6,7 @@ public interface SearchInterface {
 
     public interface View{
         void closeSearchActivity();
+        void SearchCar();
     }
 
     public interface Presenter{

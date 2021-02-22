@@ -15,6 +15,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -43,12 +44,15 @@ public class ListActivity extends AppCompatActivity implements ListInterface.Vie
     String TAG = "YOURGARAGE/MainActivity";
     private ListInterface.Presenter presenter;
     private ArrayList<CarEntity> items;
-    final private int CODE_WRITE_EXTERNAL_STORAGE_PERMISSION=123;
     private Context myContext;
     private ConstraintLayout constraintLayoutListActivity;
     private TextView itemText;
-    private TextView itemTextLand;
     private int numberOfItems;
+
+    CarAdapter adaptador;
+    String ownerNameFilter = null;
+    Date receptionDateFilter = null;
+    String fuelTypeFilter = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,27 +62,6 @@ public class ListActivity extends AppCompatActivity implements ListInterface.Vie
         myContext = this;
 
         constraintLayoutListActivity = findViewById(R.id.constraintLayoutMainActivity);
-
-        //Vemos si tenemos permiso de internet.
-        /*
-        Button buttonNormal = findViewById(R.id.buttonNormal);
-        buttonNormal.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int InternetPermission = ContextCompat.checkSelfPermission(myContext, Manifest.permission.INTERNET);
-                Log.d(TAG, "INTERNET Permission: " + InternetPermission);
-                if (InternetPermission != PackageManager.PERMISSION_GRANTED) {
-                    // Permiso denegado
-                    Snackbar.make(constraintLayoutListActivity, getResources().getString(R.string.internet_permission_denied), Snackbar.LENGTH_LONG)
-                            .show();
-                } else {
-                    // Permiso aceptado
-                    Snackbar.make(constraintLayoutListActivity, getResources().getString(R.string.internet_permission_granted), Snackbar.LENGTH_LONG)
-                            .show();
-                }
-            }
-        });
-        */
 
         Toolbar toolbar = findViewById(R.id.toolbar2);
         setSupportActionBar(toolbar);
@@ -117,7 +100,16 @@ public class ListActivity extends AppCompatActivity implements ListInterface.Vie
     protected void onResume() {
         super.onResume();
 
-        items = presenter.getAllItemsSumarize();
+
+        if(ownerNameFilter==null && receptionDateFilter==null && fuelTypeFilter==null){
+            items = presenter.getAllItemsSumarize();
+        }else{
+            items = presenter.getItemsFiltered(ownerNameFilter, receptionDateFilter, fuelTypeFilter);
+            ownerNameFilter = null;
+            receptionDateFilter = null;
+            fuelTypeFilter = null;
+        }
+
         numberOfItems = items.size();
         itemText = findViewById(R.id.textView3);
         itemText.setText("La lista contiene "+ numberOfItems + " elementos");
@@ -125,7 +117,7 @@ public class ListActivity extends AppCompatActivity implements ListInterface.Vie
         final RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
 
         // Crea el Adaptador con los datos de la lista anterior
-        final CarAdapter adaptador = new CarAdapter(items);
+        adaptador = new CarAdapter(items);
 
         // Asocia el elemento de la lista con una acción al ser pulsado
         adaptador.setOnClickListener(new View.OnClickListener() {
@@ -188,6 +180,33 @@ public class ListActivity extends AppCompatActivity implements ListInterface.Vie
     }
 
     @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode == RESULT_CANCELED){
+            System.out.println("Back");
+        }else{
+            if(!data.getExtras().getString("ownerName").equals("")){
+                ownerNameFilter = data.getExtras().getString("ownerName");
+                System.out.println(ownerNameFilter);
+            }
+
+            if(!data.getExtras().getString("receptionDate").equals("")){
+                SimpleDateFormat newDate = new SimpleDateFormat("dd/MM/yyyy");
+                try {
+                    receptionDateFilter = newDate.parse(data.getExtras().getString("receptionDate"));
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            if(data.getExtras().getLong("spinner")!=0){
+                ArrayList<String> items = presenter.getFuelTypes();
+                fuelTypeFilter = items.get((int)data.getExtras().getLong("spinner"));
+            }
+        }
+    }
+
+    @Override
     public void startFormActivity() {
         Intent intent = new Intent(getApplicationContext(), FormActivity.class);
         startActivity(intent);
@@ -203,7 +222,7 @@ public class ListActivity extends AppCompatActivity implements ListInterface.Vie
     @Override
     public void startSearchActivity(){
         Intent intent = new Intent(getApplicationContext(), SearchActivity.class);
-        startActivity(intent);
+        startActivityForResult(intent,0);
     }
 
     @Override

@@ -5,6 +5,7 @@ import com.anto.yourgarage.views.MyApplication;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -116,24 +117,28 @@ public class CarModel {
         realm.commitTransaction();
     }
 
-    public static ArrayList<CarEntity> filterElement(String nombre, String fechaRecepcion, String fuelType){
-        //Faltan comprobaciones si los campos vienen nulos.
-
+    public static ArrayList<CarEntity> filterElement(String nombre, Date fechaRecepcion, String fuelType){
         Realm realm = Realm.getDefaultInstance();
-        ArrayList<CarEntity> carsFiltered = new ArrayList<>();
 
-        RealmQuery<CarEntity> query = realm.where(CarEntity.class);
-        query.equalTo("ownerName", nombre);
-        query.equalTo("receptionDate", fechaRecepcion);
-        query.equalTo("fuelType", fuelType);
+        RealmResults<CarEntity> result;
+        if(fechaRecepcion==null){
+            result = realm.where(CarEntity.class).contains("ownerName", nombre)
+                    .contains("fuelType", fuelType)
+                    .findAll();
+        }else {
 
-        RealmResults<CarEntity> myCars = query.findAll();
-
-        for(CarEntity car: myCars){
-            carsFiltered.add(car);
+            result = realm.where(CarEntity.class).contains("ownerName", nombre)
+                    .equalTo("receptionDate", fechaRecepcion)
+                    .contains("fuelType", fuelType)
+                    .findAll();
         }
 
-        return carsFiltered;
+        ArrayList<CarEntity> carList = new ArrayList<>();
+        carList.addAll(realm.copyFromRealm(result));
+
+        realm.close();
+
+        return carList;
     }
 
 }

@@ -88,6 +88,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView19">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/ownerNameSearch"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/owner" />

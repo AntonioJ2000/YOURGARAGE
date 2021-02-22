@@ -5,6 +5,7 @@ import com.anto.yourgarage.models.CarEntity;
 import com.anto.yourgarage.models.CarModel;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class ListPresenter implements ListInterface.Presenter {
 
@@ -48,6 +49,16 @@ public class ListPresenter implements ListInterface.Presenter {
     @Override
     public void deleteCarBySwipe(String id) {
         CarModel.delete(id);
+    }
+
+    @Override
+    public ArrayList<CarEntity> getItemsFiltered(String ownerName, Date receptionDate, String fuelType) {
+        return CarModel.filterElement(ownerName,receptionDate,fuelType);
+    }
+
+    @Override
+    public ArrayList<String> getFuelTypes() {
+        return CarModel.getAllSpinnerItemsForSearch();
     }
 
     public void onSwipeRecyclerViewItem(String id){

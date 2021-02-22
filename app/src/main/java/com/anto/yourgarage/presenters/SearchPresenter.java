@@ -15,7 +15,7 @@ public class SearchPresenter implements SearchInterface.Presenter {
 
     @Override
     public void onClickSearchCar() {
-        view.closeSearchActivity();
+        view.SearchCar();
     }
 
     @Override

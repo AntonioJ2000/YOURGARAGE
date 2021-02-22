@@ -2,6 +2,7 @@ package com.anto.yourgarage.views;
 
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.anto.yourgarage.R;
@@ -21,6 +22,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -34,6 +36,10 @@ public class SearchActivity extends AppCompatActivity implements SearchInterface
     Calendar calendar;
     DatePickerDialog datePickerDialog;
     int Year, Month, Day;
+
+    EditText ownerNameText;
+    EditText dateText;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,20 +60,22 @@ public class SearchActivity extends AppCompatActivity implements SearchInterface
             });
         }
 
-        final EditText etReceptionDate = (EditText) findViewById(R.id.editTextReceptionDate);
+        ownerNameText = findViewById(R.id.ownerNameSearch);
+
+        dateText = (EditText) findViewById(R.id.editTextReceptionDate);
         calendar = Calendar.getInstance();
         Year = calendar.get(Calendar.YEAR);
         Month = calendar.get(Calendar.MONTH);
         Day = calendar.get(Calendar.DAY_OF_MONTH);
 
-        etReceptionDate.setOnClickListener(new View.OnClickListener() {
+        dateText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 datePickerDialog = new DatePickerDialog(myContext, new DatePickerDialog.OnDateSetListener() {
                     // Definir la acción al pulsar OK en el calendario
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int day) {
-                        etReceptionDate.setText(String.valueOf(day) + "/" + String.valueOf(month+1) + "/" + String.valueOf(year));
+                        dateText.setText(String.valueOf(day) + "/" + String.valueOf(month+1) + "/" + String.valueOf(year));
                     }
                 },Year, Month, Day);
                 datePickerDialog.show();
@@ -108,16 +116,16 @@ public class SearchActivity extends AppCompatActivity implements SearchInterface
         });
     }
 
-    private int getIndex(Spinner spinner, String myString){
-        int index = 0;
-
-        for (int i=0;i<spinner.getCount();i++){
-            if (spinner.getItemAtPosition(i).equals(myString)){
-                index = i;
-            }
-        }
-        return index;
+    @Override
+    public void SearchCar() {
+        Intent i = getIntent();
+        i.putExtra("ownerName", ownerNameText.getText().toString());
+        i.putExtra("receptionDate", dateText.getText().toString());
+        i.putExtra("spinner", spinner.getSelectedItemId());
+        setResult(RESULT_OK,i);
+        finish();
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
