@@ -54,6 +54,8 @@ public class ListActivity extends AppCompatActivity implements ListInterface.Vie
     Date receptionDateFilter = null;
     String fuelTypeFilter = null;
 
+    String helpHint = "list";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -168,8 +170,8 @@ public class ListActivity extends AppCompatActivity implements ListInterface.Vie
         int id = item.getItemId();
         presenter = new ListPresenter(this);
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        if (id == R.id.action_help) {
+            presenter.onClickHelp();
         }else if(id == R.id.action_search){
             presenter.onClickSearch();
         }else if(id == R.id.action_about){
@@ -228,6 +230,13 @@ public class ListActivity extends AppCompatActivity implements ListInterface.Vie
     @Override
     public void startAboutActivity() {
         Intent intent = new Intent(getApplicationContext(), AboutActivity.class);
+        startActivity(intent);
+    }
+
+    @Override
+    public void startHelpActivity(){
+        Intent intent = new Intent(getApplicationContext(), HelpActivity.class);
+        intent.putExtra("help", helpHint);
         startActivity(intent);
     }
 

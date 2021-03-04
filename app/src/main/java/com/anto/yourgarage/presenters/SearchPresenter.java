@@ -19,6 +19,11 @@ public class SearchPresenter implements SearchInterface.Presenter {
     }
 
     @Override
+    public void onClickHelp() {
+        view.startHelpActivity();
+    }
+
+    @Override
     public ArrayList<String> getAllFuelTypesForSearch() {
         ArrayList<String> fuelTypes = new ArrayList<>();
         fuelTypes = CarModel.getAllSpinnerItemsForSearch();

@@ -7,12 +7,14 @@ import android.os.Bundle;
 
 import com.anto.yourgarage.R;
 import com.anto.yourgarage.interfaces.SearchInterface;
+import com.anto.yourgarage.presenters.ListPresenter;
 import com.anto.yourgarage.presenters.SearchPresenter;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -22,7 +24,6 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -40,13 +41,14 @@ public class SearchActivity extends AppCompatActivity implements SearchInterface
     EditText ownerNameText;
     EditText dateText;
 
+    String helpHint = "search";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         myContext = this;
         setContentView(R.layout.activity_search);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar3);
         if (toolbar != null) {
             setSupportActionBar(toolbar);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -117,6 +119,28 @@ public class SearchActivity extends AppCompatActivity implements SearchInterface
     }
 
     @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+        presenter = new SearchPresenter(this);
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_help) {
+            presenter.onClickHelp();
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void startHelpActivity() {
+        Intent intent = new Intent(getApplicationContext(), HelpActivity.class);
+        intent.putExtra("help", helpHint);
+        startActivity(intent);
+    }
+
+    @Override
     public void SearchCar() {
         Intent i = getIntent();
         i.putExtra("ownerName", ownerNameText.getText().toString());
@@ -132,11 +156,6 @@ public class SearchActivity extends AppCompatActivity implements SearchInterface
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_help, menu);
         return true;
-    }
-
-    @Override
-    public void closeSearchActivity() {
-        finish();
     }
 
 

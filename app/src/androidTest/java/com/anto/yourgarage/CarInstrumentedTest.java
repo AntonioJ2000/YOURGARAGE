@@ -115,7 +115,6 @@ public class CarInstrumentedTest {
         fueltypes.add("Seleccione combustible");
         fueltypes.add("Otro...");
         fueltypes.add("Gasolina");
-        fueltypes.add("Gasoil");
 
         assertEquals(fueltypes, CarModel.getAllSpinnerItems());
     }

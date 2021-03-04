@@ -68,6 +68,11 @@ public class FormPresenter implements FormInterface.Presenter {
     }
 
     @Override
+    public void onClickHelp() {
+        view.startHelpActivity();
+    }
+
+    @Override
     public void onClickUpdateCar(CarEntity car) {
         if(CarModel.update(car)){
             view.closeFormActivity();

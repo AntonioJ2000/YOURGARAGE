@@ -5,12 +5,13 @@ import java.util.ArrayList;
 public interface SearchInterface {
 
     public interface View{
-        void closeSearchActivity();
+        void startHelpActivity();
         void SearchCar();
     }
 
     public interface Presenter{
         void onClickSearchCar();
+        void onClickHelp();
         ArrayList<String> getAllFuelTypesForSearch();
     }
 }

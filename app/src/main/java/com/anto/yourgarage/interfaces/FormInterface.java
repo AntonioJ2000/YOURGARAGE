@@ -8,11 +8,13 @@ public interface FormInterface {
 
     public interface View{
         void closeFormActivity();
+        void startHelpActivity();
         void addImage();
     }
 
     public interface Presenter{
         void onClickSaveCar(CarEntity car);
+        void onClickHelp();
         void addImage();
         String getError(String error_code);
         void onClickUpdateCar(CarEntity car);

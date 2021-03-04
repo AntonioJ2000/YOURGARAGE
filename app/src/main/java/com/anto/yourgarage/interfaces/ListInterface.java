@@ -13,6 +13,7 @@ public interface ListInterface {
         void startFormActivity(String id);
         void startSearchActivity();
         void startAboutActivity();
+        void startHelpActivity();
         ArrayList<CarEntity> getAllItemsSumarize();
 
     }
@@ -21,6 +22,7 @@ public interface ListInterface {
         void onClickAddCar();
         void onClickSearch();
         void onClickAbout();
+        void onClickHelp();
         void onClickRecyclerViewItem(String id);
         ArrayList<CarEntity> getAllItemsSumarize();
         void deleteCarBySwipe(String id);
